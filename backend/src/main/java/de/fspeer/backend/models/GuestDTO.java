@@ -1,29 +1,30 @@
 package de.fspeer.backend.models;
 
-import java.util.Date;
-
 public record GuestDTO (
         String firstName,
         String lastName,
-        Date birthDate,
+        String birthDate,
         String nationality,
         String street,
         String city,
         int zip,
         String email,
-        int phoneNumber,
+        String phoneNumber,
         String travelDocumentNumber
 ) {
-    public GuestDTO(String firstName, String lastName, Date birthDate, String nationality, String street, String city, int zip, String email, int phoneNumber, String travelDocumentNumber) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.nationality = nationality;
-        this.street = street;
-        this.city = city;
-        this.zip = zip;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.travelDocumentNumber = travelDocumentNumber;
+    public Guest fromDTO(String id) {
+        return new Guest(id,
+                this.firstName(),
+                this.lastName(),
+                this.birthDate(),
+                this.nationality(),
+                this.street(),
+                this.city(),
+                this.zip(),
+                this.email(),
+                this.phoneNumber(),
+                this.travelDocumentNumber()
+        );
     }
 }
+

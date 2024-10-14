@@ -1,7 +1,13 @@
 package de.fspeer.backend.service;
 
+import org.springframework.stereotype.Service;
+
+import java.util.UUID;
+
+@Service
 public class IdService {
-    public String generateId(){
-        return java.util.UUID.randomUUID().toString();
+        public static String generateId() {
+        return UUID.randomUUID().toString();
     }
-}
+    }
+
