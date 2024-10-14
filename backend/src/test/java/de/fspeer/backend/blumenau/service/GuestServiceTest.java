@@ -4,6 +4,7 @@ import de.fspeer.backend.blumenau.models.Guest;
 import de.fspeer.backend.blumenau.models.GuestDTO;
 import de.fspeer.backend.blumenau.repository.GuestRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 class GuestServiceTest {
 
     private final GuestRepository guestRepository = mock(GuestRepository.class);
