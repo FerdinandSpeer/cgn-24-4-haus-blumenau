@@ -1,6 +1,11 @@
-package de.fspeer.backend.models;
+package de.fspeer.backend.blumenau.models;
 
-public record GuestDTO (
+import lombok.AllArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
+public record Guest(
+        String id,
         String firstName,
         String lastName,
         String birthDate,
@@ -12,8 +17,8 @@ public record GuestDTO (
         String phoneNumber,
         String travelDocumentNumber
 ) {
-    public Guest fromDTO(String id) {
-        return new Guest(id,
+    public GuestDTO toDTO() {
+        return new GuestDTO(
                 this.firstName(),
                 this.lastName(),
                 this.birthDate(),
@@ -27,4 +32,3 @@ public record GuestDTO (
         );
     }
 }
-

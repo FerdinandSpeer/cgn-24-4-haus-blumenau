@@ -1,8 +1,6 @@
-package de.fspeer.backend.models;
+package de.fspeer.backend.blumenau.models;
 
-
-public record Guest(
-        String id,
+public record GuestDTO (
         String firstName,
         String lastName,
         String birthDate,
@@ -14,8 +12,8 @@ public record Guest(
         String phoneNumber,
         String travelDocumentNumber
 ) {
-    public GuestDTO toDTO() {
-        return new GuestDTO(
+    public Guest fromDTO(String id) {
+        return new Guest(id,
                 this.firstName(),
                 this.lastName(),
                 this.birthDate(),
@@ -29,3 +27,4 @@ public record Guest(
         );
     }
 }
+

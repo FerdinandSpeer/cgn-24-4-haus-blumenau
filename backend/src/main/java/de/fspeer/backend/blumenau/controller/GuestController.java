@@ -1,8 +1,8 @@
-package de.fspeer.backend.controller;
+package de.fspeer.backend.blumenau.controller;
 
-import de.fspeer.backend.models.Guest;
-import de.fspeer.backend.models.GuestDTO;
-import de.fspeer.backend.service.GuestService;
+import de.fspeer.backend.blumenau.models.Guest;
+import de.fspeer.backend.blumenau.models.GuestDTO;
+import de.fspeer.backend.blumenau.service.GuestService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package de.fspeer.backend;
+package de.fspeer.backend.blumenau;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

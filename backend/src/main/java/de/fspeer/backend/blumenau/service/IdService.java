@@ -1,4 +1,4 @@
-package de.fspeer.backend.service;
+package de.fspeer.backend.blumenau.service;
 
 import org.springframework.stereotype.Service;
 
@@ -6,8 +6,9 @@ import java.util.UUID;
 
 @Service
 public class IdService {
-        public static String generateId() {
+
+    public String generateId() {
         return UUID.randomUUID().toString();
     }
-    }
+}
 
