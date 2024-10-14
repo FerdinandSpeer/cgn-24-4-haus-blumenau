@@ -1,6 +1,5 @@
 package de.fspeer.backend.blumenau.models;
 
-import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
