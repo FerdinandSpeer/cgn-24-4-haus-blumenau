@@ -1,4 +1,4 @@
-package de.fspeer.backend.blumenau.models;
+package de.fspeer.backend.models;
 
 public record GuestDTO (
         String firstName,

@@ -1,4 +1,4 @@
-package de.fspeer.backend.blumenau.service;
+package de.fspeer.backend.service;
 
 import org.springframework.stereotype.Service;
 

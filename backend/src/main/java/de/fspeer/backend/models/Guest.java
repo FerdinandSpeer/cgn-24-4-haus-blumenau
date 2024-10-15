@@ -1,4 +1,4 @@
-package de.fspeer.backend.blumenau.models;
+package de.fspeer.backend.models;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 

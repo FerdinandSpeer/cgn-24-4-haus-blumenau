@@ -1,8 +1,8 @@
-package de.fspeer.backend.blumenau.service;
+package de.fspeer.backend.service;
 
-import de.fspeer.backend.blumenau.models.Guest;
-import de.fspeer.backend.blumenau.models.GuestDTO;
-import de.fspeer.backend.blumenau.repository.GuestRepository;
+import de.fspeer.backend.models.Guest;
+import de.fspeer.backend.models.GuestDTO;
+import de.fspeer.backend.repository.GuestRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
