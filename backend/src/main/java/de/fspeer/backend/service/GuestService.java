@@ -6,6 +6,7 @@ import de.fspeer.backend.repository.GuestRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GuestService {
@@ -23,20 +24,11 @@ public class GuestService {
         return guestRepository.findAll();
     }
 
-    public Guest findById(String id) {
-        return guestRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("toDTO not found"));
+    public Optional<Guest> findById(String id) {
+        return guestRepository.findById(id);
     }
 
     public Guest saveGuest(GuestDTO guestDTO) {
         return guestRepository.save(guestDTO.fromDTO(idService.generateId()));
-    }
-
-    public Guest updateGuest(GuestDTO guestDTO, String id) {
-        findById(id);
-        return guestRepository.save(guestDTO.fromDTO(id));
-    }
-
-    public void deleteById(String id) {
-        guestRepository.deleteById(id);
     }
 }

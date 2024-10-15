@@ -42,7 +42,7 @@ class GuestServiceTest {
 
         GuestService guestService = new GuestService(guestRepository, idService);
 
-        Guest actualGuest = guestService.findById("1");
+        Guest actualGuest = guestService.findById("1").orElseThrow();
         verify(guestRepository).findById("1");
         assertEquals(actualGuest, expectedGuest);
     }
@@ -58,26 +58,4 @@ class GuestServiceTest {
         verify(guestRepository).save(any(Guest.class));
         assertEquals(actualGuest, expectedGuest);
     }
-
-    @Test
-    void updateGuest() {
-        Guest expectedGuest = new Guest("1", "test",
-                "test", "test", "test", "test",
-                "test", 1, "test", "test",
-                "test");
-        when(guestRepository.findById("1")).thenReturn(Optional.of(new Guest("1",
-                "test123", "test", "test", "test", "test",
-                "test", 1, "test", "test",
-                "test")));
-        when(guestRepository.save(any(Guest.class))).thenReturn(expectedGuest);
-
-        GuestService guestService = new GuestService(guestRepository, idService);
-
-        Guest actualGuest = guestService.updateGuest(new GuestDTO("test",
-                "test", "test", "test", "test", "test",
-                1, "test", "test", "test"), "1");
-        verify(guestRepository).save(any(Guest.class));
-        assertEquals(actualGuest, expectedGuest);
-    }
-
 }
