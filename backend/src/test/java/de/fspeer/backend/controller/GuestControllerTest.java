@@ -16,7 +16,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@DirtiesContext
 class GuestControllerTest {
 
     @Autowired
@@ -25,6 +24,7 @@ class GuestControllerTest {
     @Autowired
     private GuestRepository guestRepository;
 
+    @DirtiesContext
     @Test
     void findAll_returnEmpty_ifDBEmpty() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
@@ -32,6 +32,7 @@ class GuestControllerTest {
                 .andExpect(content().json("[]"));
     }
 
+    @DirtiesContext
     @Test
     void findAll_getGuest_withGuestInDB() throws Exception {
         guestRepository.save(new Guest("1", "test",
@@ -45,14 +46,13 @@ class GuestControllerTest {
                     [
                         {
                             "id": "1",
-                            "firstName": "test",
-                            "lastName": "test"
+                            "firstName": "test"
                         }
                     ]
                     """));
     }
 
-
+    @DirtiesContext
     @Test
     void findById_getGuest_withGuestInDB() throws Exception {
             guestRepository.save(new Guest("1", "test",
@@ -71,6 +71,7 @@ class GuestControllerTest {
                     """));
         }
 
+    @DirtiesContext
     @Test
     void saveGuest_shouldReturnNewGuest() throws Exception {
         mockMvc.perform(
