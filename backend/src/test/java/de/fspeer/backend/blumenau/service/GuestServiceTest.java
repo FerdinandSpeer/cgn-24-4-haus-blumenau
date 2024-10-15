@@ -16,6 +16,7 @@ class GuestServiceTest {
     private final GuestRepository guestRepository = mock(GuestRepository.class);
     private final IdService idService = mock(IdService.class);
 
+
     @Test
     void findAll() {
         List<Guest> expectedGuestList = List.of(new Guest("1", "test",
