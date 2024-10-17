@@ -1,6 +1,6 @@
 package de.fspeer.backend.service;
 
-import de.fspeer.backend.models.Guest;
+import de.fspeer.backend.models.GuestDTO;
 import de.fspeer.backend.models.GuestGroup;
 import de.fspeer.backend.repository.GuestGroupRepository;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,8 @@ public class GuestGroupService {
         this.idService = idService;
     }
 
-    public GuestGroup createGuestGroup(List<Guest> guests) {
-        return guestGroupRepository.save(new GuestGroup(idService.generateId(), guests));
+    public GuestGroup createGuestGroup(List<GuestDTO> guestsDTO) {
+        return guestGroupRepository.save(new GuestGroup(idService.generateId(), guestsDTO));
     }
 
     public Optional<GuestGroup> findByGroupId(String groupId) {
@@ -28,4 +28,7 @@ public class GuestGroupService {
     }
 
 
+    public List<GuestGroup> findAll() {
+        return guestGroupRepository.findAll();
+    }
 }

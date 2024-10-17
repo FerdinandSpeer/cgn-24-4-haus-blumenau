@@ -1,6 +1,6 @@
 package de.fspeer.backend.service;
 
-import de.fspeer.backend.models.Guest;
+import de.fspeer.backend.models.GuestDTO;
 import de.fspeer.backend.models.GuestGroup;
 import de.fspeer.backend.repository.GuestGroupRepository;
 import org.junit.jupiter.api.Test;
@@ -19,29 +19,29 @@ class GuestGroupServiceTest {
 
     @Test
     void createGuestGroup() {
-        List<Guest> guests = List.of(new Guest("1", "test", "test", "test", "test", "test", "test", 1, "test", "test", "test"));
-        GuestGroup guestGroup = new GuestGroup("1", guests);
+        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", 1, "test", "test", "test"));
+        GuestGroup guestGroup = new GuestGroup("1", guestsDTO);
         when(guestGroupRepository.save(guestGroup)).thenReturn(guestGroup);
         when(idService.generateId()).thenReturn("1");
 
         GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
 
-        GuestGroup actualGuestGroup = guestGroupService.createGuestGroup(guests);
+        GuestGroup actualGuestGroup = guestGroupService.createGuestGroup(guestsDTO);
         verify(guestGroupRepository).save(guestGroup);
         assertEquals(actualGuestGroup, guestGroup);
     }
 
     @Test
     void findByGroupId() {
-        List<Guest> guests = List.of(new Guest("1", "test", "test", "test", "test", "test", "test", 1, "test", "test", "test"));
-        GuestGroup guestGroup = new GuestGroup("2", guests);
+        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", 1, "test", "test", "test"));
+        GuestGroup guestGroup = new GuestGroup("2", guestsDTO);
         when(guestGroupRepository.findById("2")).thenReturn(Optional.of(guestGroup));
 
         GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
 
         GuestGroup actualGuestGroup = guestGroupService.findByGroupId("2").orElseThrow();
         verify(guestGroupRepository).findById("2");
-        assertEquals(actualGuestGroup.guests(), guestGroup.guests());    }
+        assertEquals(actualGuestGroup.guestsDTO(), guestGroup.guestsDTO());    }
 
 @Test
 void findByGroupId_groupNotFound() {

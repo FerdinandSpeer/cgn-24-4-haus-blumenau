@@ -1,6 +1,6 @@
 package de.fspeer.backend.controller;
 
-import de.fspeer.backend.models.Guest;
+import de.fspeer.backend.models.GuestDTO;
 import de.fspeer.backend.models.GuestGroup;
 import de.fspeer.backend.service.GuestGroupService;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +18,17 @@ public class GuestGroupController {
         this.guestGroupService = guestGroupService;
     }
 
-    @GetMapping("/{id}")
-    public Optional<GuestGroup> findByGroupId(@PathVariable String id) {
-        return guestGroupService.findByGroupId(id);
+    @GetMapping
+    public List<GuestGroup> findAll() {
+        return guestGroupService.findAll();
+    }
+    @GetMapping("/{groupId}")
+    public Optional<GuestGroup> findByGroupId(@PathVariable String groupId) {
+        return guestGroupService.findByGroupId(groupId);
     }
 
     @PostMapping
-    public GuestGroup createGuestGroup(@RequestBody List<Guest> guests) {
-        return guestGroupService.createGuestGroup(guests);
+    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO) {
+        return guestGroupService.createGuestGroup(guestsDTO);
     }
 }
