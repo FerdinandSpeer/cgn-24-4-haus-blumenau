@@ -6,6 +6,7 @@ import de.fspeer.backend.service.GuestGroupService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/guest-group")
@@ -18,7 +19,7 @@ public class GuestGroupController {
     }
 
     @GetMapping("/{id}")
-    public List<Guest> findByGroupId(@PathVariable String id) {
+    public Optional<GuestGroup> findByGroupId(@PathVariable String id) {
         return guestGroupService.findByGroupId(id);
     }
 

@@ -6,6 +6,7 @@ import de.fspeer.backend.repository.GuestGroupRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class GuestGroupService {
@@ -22,8 +23,8 @@ public class GuestGroupService {
         return guestGroupRepository.save(new GuestGroup(idService.generateId(), guests));
     }
 
-    public List<Guest> findByGroupId(String groupId) {
-        return guestGroupRepository.findById(groupId).orElseThrow().guests();
+    public Optional<GuestGroup> findByGroupId(String groupId) {
+        return guestGroupRepository.findById(groupId);
     }
 
 
