@@ -15,7 +15,7 @@ export default function GuestForm() {
         setNewGuest({
             firstName: "",
             lastName: " ",
-            birthDate: " ",
+            birthDate: "YYYY-MM-DD",
             id: undefined,
             city: " ",
             email: " ",
@@ -27,8 +27,8 @@ export default function GuestForm() {
         });
     }
 
-    function createNewGuest() {
-        axios.post("/guest", newGuest)
+    function createNewGuestGroup() {
+        axios.post("/guest-group", guestList)
             .then(response => console.log(response))
             .catch(err => console.log(err))
     }
@@ -40,6 +40,7 @@ export default function GuestForm() {
             [name]: value
         }));
     }
+
 
 
     return (
@@ -88,7 +89,7 @@ export default function GuestForm() {
 
             </form>
             <GuestList guests={guestList}/>
-            <button>Abschicken</button>
+            <button onClick={createNewGuestGroup}>Abschicken</button>
         </>
     );
 }
