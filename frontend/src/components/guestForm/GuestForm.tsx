@@ -30,6 +30,7 @@ export default function GuestForm() {
     function createNewGuestGroup() {
         axios.post("/guest-group", guestList)
             .then(response => console.log(response))
+            .then(() => setGuestList([]))
             .catch(err => console.log(err))
     }
 
