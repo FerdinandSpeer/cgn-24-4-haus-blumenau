@@ -45,53 +45,80 @@ export default function GuestForm() {
 
 
     return (
-        <>
-            <h1> Gästeanmeldung </h1>
-            <form id={"guestForm"} onSubmit={handleSubmit}>
+        <div className={"BookingPage"}>
+            <div className={"GuestForm"}>
+                <h1>Hier Anmelden</h1>
+                <form className={"guestForm"} onSubmit={handleSubmit}>
 
-                <label>Vorname: </label>
-                <input value={newGuest?.firstName} type="text" id="firstName" name="firstName" required
-                       onChange={handleChange}/>
+                    <div>
+                        <label>Vorname: </label>
+                        <input value={newGuest?.firstName} type="text" id="firstName" name="firstName" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Nachname: </label>
-                <input value={newGuest?.lastName} type="text" id="lastName" name="lastName" required
-                       onChange={handleChange}/>
+                    <div>
+                        <label>Nachname: </label>
+                        <input value={newGuest?.lastName} type="text" id="lastName" name="lastName" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label> Geburtstag: </label>
-                <input value={newGuest?.birthDate} type="date" id="birthDate" name="birthDate" required
-                       onChange={handleChange}/>
+                    <div>
+                        <label>Geburtstag: </label>
+                        <input value={newGuest?.birthDate} type="date" id="birthDate" name="birthDate" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Nationalität: </label>
-                <input value={newGuest?.nationality} type="text" id="nationality" name="nationality" required
-                       onChange={handleChange}/>
+                    <div>
+                        <label>Nationalität: </label>
+                        <input value={newGuest?.nationality} type="text" id="nationality" name="nationality" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Straße: </label>
-                <input value={newGuest?.street} type="text" id="street" name="street" required onChange={handleChange}/>
+                    <div>
+                        <label>Straße: </label>
+                        <input value={newGuest?.street} type="text" id="street" name="street" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Stadt: </label>
-                <input value={newGuest?.city} type="text" id="city" name="city" required onChange={handleChange}/>
+                    <div>
+                        <label>Stadt: </label>
+                        <input value={newGuest?.city} type="text" id="city" name="city" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>PLZ: </label>
-                <input value={newGuest?.zip} type="number" id="zip" name="zip" required onChange={handleChange}/>
+                    <div>
+                        <label>PLZ: </label>
+                        <input value={newGuest?.zip} type="number" id="zip" name="zip" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Email: </label>
-                <input value={newGuest?.email} type="email" id="email" name="email" required onChange={handleChange}/>
+                    <div>
+                        <label>Email: </label>
+                        <input value={newGuest?.email} type="email" id="email" name="email" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Telefonnummer: </label>
-                <input value={newGuest?.phoneNumber} type="tel" id="phoneNumber" name="phoneNumber" required
-                       onChange={handleChange}/>
+                    <div>
+                        <label>Telefonnummer: </label>
+                        <input value={newGuest?.phoneNumber} type="tel" id="phoneNumber" name="phoneNumber" required
+                               onChange={handleChange}/>
+                    </div>
 
-                <label>Ausweisnummer: </label>
-                <input value={newGuest?.travelDocumentNumber} type="text" id="travelDocumentNumber"
-                       name="travelDocumentNumber" required
-                       onChange={handleChange}/>
+                    <div>
+                        <label>Ausweisnummer: </label>
+                        <input value={newGuest?.travelDocumentNumber} type="text" id="travelDocumentNumber"
+                               name="travelDocumentNumber" required onChange={handleChange}/>
+                    </div>
 
-                <button type="submit">Speichern</button>
+                    <button type="submit" className="primaryButton">Speichern</button>
 
-            </form>
+                </form>
+            </div>
+            <div className={"GuestList"}>
             <GuestList guests={guestList}/>
-            <button onClick={createNewGuestGroup}>Abschicken</button>
-        </>
+                <button onClick={createNewGuestGroup} className="secondaryButton">Abschicken</button>
+            </div>
+        </div>
     );
 }
 
