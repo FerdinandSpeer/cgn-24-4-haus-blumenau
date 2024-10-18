@@ -10,6 +10,7 @@ export default function HomePage() {
                 <NavBar/>
             </div>
             <h1>Home Page</h1>
+            <button>Hier Buchen!</button>
         </>
     );
 }
