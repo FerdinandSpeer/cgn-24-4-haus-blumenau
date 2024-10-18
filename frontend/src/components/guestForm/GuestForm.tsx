@@ -43,7 +43,6 @@ export default function GuestForm() {
     }
 
 
-
     return (
         <div className={"BookingPage"}>
             <div className={"GuestForm"}>
@@ -115,7 +114,7 @@ export default function GuestForm() {
                 </form>
             </div>
             <div className={"GuestList"}>
-            <GuestList guests={guestList}/>
+                <GuestList guests={guestList}/>
                 <button onClick={createNewGuestGroup} className="secondaryButton">Abschicken</button>
             </div>
         </div>

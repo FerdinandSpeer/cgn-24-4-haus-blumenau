@@ -4,3 +4,7 @@
     padding: 10px 0;
     text-align: center;
 }
+
+body {
+    padding-top: 60px; /* Höhe der NavBar */
+}

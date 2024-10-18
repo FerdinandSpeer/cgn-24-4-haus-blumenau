@@ -1,9 +1,21 @@
 .NavBar {
-    background-color: #535bf2;
-    padding: 10px;
+    background-color: #809696;
+    padding: 5px;
     display: flex;
     justify-content: space-between;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
     align-items: center;
+    height: 60px;
+}
+.NavBarContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 #NavBarList {
@@ -24,5 +36,10 @@
 
 .NavBarElement{
     display: flex;
-    margin: 20px;
+    margin: 30px;
+}
+
+.Watzmann {
+    border-radius: 50%;
+    height: 50px;
 }
