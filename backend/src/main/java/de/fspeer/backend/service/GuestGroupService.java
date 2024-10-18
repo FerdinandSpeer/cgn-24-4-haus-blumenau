@@ -6,7 +6,7 @@ import de.fspeer.backend.repository.GuestGroupRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class GuestGroupService {
@@ -20,11 +20,11 @@ public class GuestGroupService {
     }
 
     public GuestGroup createGuestGroup(List<GuestDTO> guestsDTO) {
-        return guestGroupRepository.save(new GuestGroup(idService.generateId(), guestsDTO));
+        return guestGroupRepository.save(new GuestGroup(idService.generateId(),guestsDTO));
     }
 
-    public Optional<GuestGroup> findByGroupId(String groupId) {
-        return guestGroupRepository.findById(groupId);
+    public GuestGroup findByGroupId(String Id) {
+        return guestGroupRepository.findById(Id).orElseThrow(()-> new NoSuchElementException("GuestGroup not found"));
     }
 
 

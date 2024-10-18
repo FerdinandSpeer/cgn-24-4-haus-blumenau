@@ -6,10 +6,11 @@ import de.fspeer.backend.repository.GuestGroupRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class GuestGroupServiceTest {
@@ -39,7 +40,7 @@ class GuestGroupServiceTest {
 
         GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
 
-        GuestGroup actualGuestGroup = guestGroupService.findByGroupId("2").orElseThrow();
+        GuestGroup actualGuestGroup = guestGroupService.findByGroupId("2");
         verify(guestGroupRepository).findById("2");
         assertEquals(actualGuestGroup.guestsDTO(), guestGroup.guestsDTO());    }
 
@@ -49,9 +50,7 @@ void findByGroupId_groupNotFound() {
 
     GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
 
-    Optional<GuestGroup> result = guestGroupService.findByGroupId("1");
-    assertTrue(result.isEmpty());
-    verify(guestGroupRepository).findById("1");
+    assertThrows(NoSuchElementException.class, () -> guestGroupService.findByGroupId("1"));
 }
 
 }

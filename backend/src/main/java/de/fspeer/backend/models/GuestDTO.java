@@ -12,6 +12,7 @@ public record GuestDTO (
         String phoneNumber,
         String travelDocumentNumber
 ) {
+
     public Guest fromDTO(String id) {
         return new Guest(id,
                 this.firstName(),

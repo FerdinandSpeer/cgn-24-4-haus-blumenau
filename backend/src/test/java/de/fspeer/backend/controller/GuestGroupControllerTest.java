@@ -44,7 +44,7 @@ class GuestGroupControllerTest {
                 .andExpect(content().json("""
                     [
                         {
-                            "groupId": "1",
+                            "id": "1",
                             "guestsDTO": []
                         }
                     ]
@@ -60,15 +60,28 @@ class GuestGroupControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
+                        "id": "1",
                         "guestsDTO": []
                     }
+                    """));
+    }
+
+    @DirtiesContext
+    @Test
+    void findById_return_ifIdNotExists() throws Exception {
+        guestGroupRepository.save(new GuestGroup("1", List.of()));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/guest-group/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                    null
                     """));
 
     }
 
     @DirtiesContext
     @Test
-    void saveGuestGroup_returnNewGuestGroup(){
+    void createGuestGroup_returnNewGuestGroup(){
 
     }
 
