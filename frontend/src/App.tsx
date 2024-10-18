@@ -1,5 +1,7 @@
 import './App.css'
-import GuestForm from "./components/guestForm/GuestForm.tsx";
+import {Route, Routes} from "react-router-dom";
+import HomePage from "./pages/homePage/HomePage.tsx";
+import BookingPage from "./pages/bookingPage/BookingPage.tsx";
 
 
 function App() {
@@ -8,7 +10,10 @@ function App() {
 
     return (
         <>
-            <GuestForm/>
+        <Routes>
+            <Route path={"/"} element={<HomePage/>}/>
+            <Route path={"/bookingPage"} element={<BookingPage/>}/>
+        </Routes>
         </>
     )
 }

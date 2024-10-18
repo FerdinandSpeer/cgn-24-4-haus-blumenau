@@ -1,0 +1,45 @@
+.NavBar {
+    background-color: #809696;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    align-items: center;
+    height: 60px;
+}
+.NavBarContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#NavBarList {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+}
+
+#NavBarList a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#NavBarList a:hover {
+    text-decoration: underline;
+}
+
+.NavBarElement{
+    display: flex;
+    margin: 30px;
+}
+
+.Watzmann {
+    border-radius: 50%;
+    height: 50px;
+}
