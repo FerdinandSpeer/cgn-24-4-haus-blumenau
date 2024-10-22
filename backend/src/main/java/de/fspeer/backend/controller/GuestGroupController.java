@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/guest-group")
+@RequestMapping("/guestGroup")
 public class GuestGroupController {
 
     private final GuestGroupService guestGroupService;
@@ -29,8 +29,8 @@ public class GuestGroupController {
     }
 
     @PostMapping
-    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO) {
-        return guestGroupService.createGuestGroup(guestsDTO);
+    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO, String groupName) {
+        return guestGroupService.createGuestGroup(guestsDTO, groupName);
     }
 
     @ExceptionHandler(NoSuchElementException.class)

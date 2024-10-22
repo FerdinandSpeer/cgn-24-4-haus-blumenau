@@ -13,6 +13,8 @@ export default function NavBar() {
                 <ul id={"NavBarList"}>
                     <Link className={"NavBarElement"} to="/">Home</Link>
                     <Link className={"NavBarElement"} to="/bookingPage">Booking</Link>
+                    <Link className={"NavBarElement"} to="/adminDashboard">Admin Dashboard</Link>
+
                 </ul>
             </nav>
         </div>

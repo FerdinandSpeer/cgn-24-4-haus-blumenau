@@ -1,5 +1,6 @@
 export type Guest = {
     id: string | undefined,
+    groupName: string | undefined,
     firstName: string | undefined,
     lastName: string | undefined,
     birthDate: string | undefined,

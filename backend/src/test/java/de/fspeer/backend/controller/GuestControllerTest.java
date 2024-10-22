@@ -37,8 +37,8 @@ class GuestControllerTest {
     void findAll_getGuest_withGuestInDB() throws Exception {
         guestRepository.save(new Guest("1", "test",
                 "test", "test", "test",
-                "test", "test",1,"test",
-                "test", "test"));
+                "test", "test","test",1,
+                "test", "test","test"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
                 .andExpect(status().isOk())
@@ -46,6 +46,7 @@ class GuestControllerTest {
                     [
                         {
                             "id": "1",
+                            "groupName": "test",
                             "firstName": "test"
                         }
                     ]
@@ -57,14 +58,15 @@ class GuestControllerTest {
     void findById_getGuest_withGuestInDB() throws Exception {
             guestRepository.save(new Guest("1", "test",
                     "test", "test", "test",
-                    "test", "test",1,"test",
-                    "test", "test"));
+                    "test", "test","test",1,
+                    "test", "test","test"));
 
             mockMvc.perform(MockMvcRequestBuilders.get("/guest/1"))
                     .andExpect(status().isOk())
                     .andExpect(content().json("""
                     {
                         "id": "1",
+                        "groupName": "test",
                         "firstName": "test",
                         "lastName": "test"
                     }

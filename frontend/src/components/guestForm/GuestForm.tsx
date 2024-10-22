@@ -11,24 +11,26 @@ export default function GuestForm() {
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setGuestList(guestList => [...guestList, newGuest]);
-        setNewGuest({
+setGuestList(guestList => newGuest ? [...guestList, newGuest] : guestList);
+setNewGuest({
+            id: "",
+            groupName: "",
             firstName: "",
-            lastName: " ",
+            lastName: "",
             birthDate: "YYYY-MM-DD",
-            id: undefined,
-            city: " ",
-            email: " ",
+            city: "",
+            email: "",
             zip: 0,
-            nationality: " ",
-            phoneNumber: " ",
-            street: " ",
-            travelDocumentNumber: " "
+            nationality: "",
+            phoneNumber: "",
+            street: "",
+            travelDocumentNumber: ""
         });
     }
 
     function createNewGuestGroup() {
-        axios.post("/guest-group", guestList)
+
+        axios.post("/guestGroup", guestList)
             .then(response => console.log(response))
             .then(() => setGuestList([]))
             .catch(err => console.log(err))
@@ -39,7 +41,7 @@ export default function GuestForm() {
         setNewGuest(prevState => ({
             ...prevState,
             [name]: value
-        }));
+        } as Guest));
     }
 
 
@@ -48,6 +50,13 @@ export default function GuestForm() {
             <div className={"GuestForm"}>
                 <h1>Hier Anmelden</h1>
                 <form className={"guestForm"} onSubmit={handleSubmit}>
+
+                    <div>
+                        <label>Gruppen-/
+                            Familienname: </label>
+                        <input value={newGuest?.groupName} type="text" id="groupName" name="groupName" required
+                               onChange={handleChange}/>
+                    </div>
 
                     <div>
                         <label>Vorname: </label>
