@@ -1,6 +1,7 @@
 package de.fspeer.backend.models;
 
 public record GuestDTO (
+        String groupName,
         String firstName,
         String lastName,
         String birthDate,
@@ -15,6 +16,7 @@ public record GuestDTO (
 
     public Guest fromDTO(String id) {
         return new Guest(id,
+                this.groupName(),
                 this.firstName(),
                 this.lastName(),
                 this.birthDate(),

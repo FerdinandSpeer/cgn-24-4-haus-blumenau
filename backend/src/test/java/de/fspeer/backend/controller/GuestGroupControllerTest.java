@@ -48,7 +48,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findAll_returnGuestGroup_ifDBHasGuestGroups() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", List.of()));
+        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup"))
                 .andExpect(status().isOk())
@@ -56,6 +56,7 @@ class GuestGroupControllerTest {
                     [
                         {
                             "id": "1",
+                            "groupName": "test",
                             "guestsDTO": []
                         }
                     ]
@@ -65,7 +66,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findById_returnGuestGroup_ifIdExists() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", List.of()));
+        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
                 .andExpect(status().isOk())

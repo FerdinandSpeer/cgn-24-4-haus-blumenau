@@ -19,8 +19,8 @@ public class GuestGroupService {
         this.idService = idService;
     }
 
-    public GuestGroup createGuestGroup(List<GuestDTO> guestsDTO) {
-        return guestGroupRepository.save(new GuestGroup(idService.generateId(),guestsDTO));
+    public GuestGroup createGuestGroup(List<GuestDTO> guestsDTO, String groupName) {
+        return guestGroupRepository.save(new GuestGroup(idService.generateId(), groupName, guestsDTO));
     }
 
     public GuestGroup findByGroupId(String Id) {

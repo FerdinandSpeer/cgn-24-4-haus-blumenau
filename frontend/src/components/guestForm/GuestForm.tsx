@@ -1,5 +1,4 @@
 import "./GuestForm.css";
-import {GuestGroup} from "../../type/GuestGroup.ts";
 import {Guest} from "../../type/Guest.ts";
 import axios from "axios";
 import {FormEvent, useState} from "react";
@@ -9,27 +8,28 @@ export default function GuestForm() {
 
     const [newGuest, setNewGuest] = useState<Guest>();
     const [guestList, setGuestList] = useState<Guest[]>([]);
-    const [guestGroup, setGuestGroup] = useState<GuestGroup>();
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setGuestList(guestList => [...guestList, newGuest]);
-        setNewGuest({
+setGuestList(guestList => newGuest ? [...guestList, newGuest] : guestList);
+setNewGuest({
+            id: "",
+            groupName: "",
             firstName: "",
-            lastName: " ",
+            lastName: "",
             birthDate: "YYYY-MM-DD",
-            id: undefined,
-            city: " ",
-            email: " ",
+            city: "",
+            email: "",
             zip: 0,
-            nationality: " ",
-            phoneNumber: " ",
-            street: " ",
-            travelDocumentNumber: " "
+            nationality: "",
+            phoneNumber: "",
+            street: "",
+            travelDocumentNumber: ""
         });
     }
 
     function createNewGuestGroup() {
+
         axios.post("/guestGroup", guestList)
             .then(response => console.log(response))
             .then(() => setGuestList([]))
@@ -41,7 +41,7 @@ export default function GuestForm() {
         setNewGuest(prevState => ({
             ...prevState,
             [name]: value
-        }));
+        } as Guest));
     }
 
 
@@ -54,7 +54,7 @@ export default function GuestForm() {
                     <div>
                         <label>Gruppen-/
                             Familienname: </label>
-                        <input value={guestGroup?.groupName} type="text" id="groupName" name="groupName" required
+                        <input value={newGuest?.groupName} type="text" id="groupName" name="groupName" required
                                onChange={handleChange}/>
                     </div>
 

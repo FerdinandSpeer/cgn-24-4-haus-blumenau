@@ -3,7 +3,7 @@ import {GuestGroup} from "../../type/GuestGroup.ts";
 import axios from "axios";
 
 
-export default function AdminGuestList(){
+export default function AdminGuestList() {
 
     const [adminGuestList, setAdminGuestList] = useState<GuestGroup[]>([]);
 
@@ -13,20 +13,22 @@ export default function AdminGuestList(){
             .catch(err => console.log(err));
     }
 
+
     useEffect(() => {
         fetchGuestList();
     }, []);
 
     return (
-        <div>
-            <h1>Admin Guest List</h1>
-            <p>Guest List will be displayed here:</p>
-            <ul>
-                {adminGuestList.map((guestGroup, index) => (
-                    <li key={index}>{guestGroup.guests}</li>
-                ))}
-            </ul>
 
-        </div>
-    );
+            <div>
+                <h1>Admin Guest List</h1>
+                <ul>
+                    {adminGuestList.map((guest) => {
+                        if (guest.guestsDTO.length > 0){
+                            return <li key={guest.id}> {guest.guestsDTO[0].groupName}, Anzahl: {guest.guestsDTO.length}</li>
+                    }})}
+                </ul>
+            </div>
+
+    )
 }

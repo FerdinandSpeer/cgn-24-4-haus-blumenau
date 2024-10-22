@@ -29,8 +29,8 @@ public class GuestGroupController {
     }
 
     @PostMapping
-    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO) {
-        return guestGroupService.createGuestGroup(guestsDTO);
+    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO, String groupName) {
+        return guestGroupService.createGuestGroup(guestsDTO, groupName);
     }
 
     @ExceptionHandler(NoSuchElementException.class)

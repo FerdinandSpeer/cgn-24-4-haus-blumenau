@@ -2,6 +2,5 @@ import {Guest} from "./Guest.ts";
 
 export type GuestGroup = {
     id: string | undefined,
-    groupName: string,
-    guests: Guest[]
+    guestsDTO: Guest[]
 }

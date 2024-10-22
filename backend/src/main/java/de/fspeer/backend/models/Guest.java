@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public record Guest(
         String id,
+        String groupName,
         String firstName,
         String lastName,
         String birthDate,
@@ -18,6 +19,7 @@ public record Guest(
 ) {
     public GuestDTO toDTO() {
         return new GuestDTO(
+                this.groupName(),
                 this.firstName(),
                 this.lastName(),
                 this.birthDate(),
