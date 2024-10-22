@@ -1,4 +1,5 @@
 import "./GuestForm.css";
+import {GuestGroup} from "../../type/GuestGroup.ts";
 import {Guest} from "../../type/Guest.ts";
 import axios from "axios";
 import {FormEvent, useState} from "react";
@@ -8,6 +9,7 @@ export default function GuestForm() {
 
     const [newGuest, setNewGuest] = useState<Guest>();
     const [guestList, setGuestList] = useState<Guest[]>([]);
+    const [guestGroup, setGuestGroup] = useState<GuestGroup>();
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -28,7 +30,7 @@ export default function GuestForm() {
     }
 
     function createNewGuestGroup() {
-        axios.post("/guest-group", guestList)
+        axios.post("/guestGroup", guestList)
             .then(response => console.log(response))
             .then(() => setGuestList([]))
             .catch(err => console.log(err))
@@ -48,6 +50,13 @@ export default function GuestForm() {
             <div className={"GuestForm"}>
                 <h1>Hier Anmelden</h1>
                 <form className={"guestForm"} onSubmit={handleSubmit}>
+
+                    <div>
+                        <label>Gruppen-/
+                            Familienname: </label>
+                        <input value={guestGroup?.groupName} type="text" id="groupName" name="groupName" required
+                               onChange={handleChange}/>
+                    </div>
 
                     <div>
                         <label>Vorname: </label>

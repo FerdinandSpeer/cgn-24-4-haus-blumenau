@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/guest-group")
+@RequestMapping("/guestGroup")
 public class GuestGroupController {
 
     private final GuestGroupService guestGroupService;

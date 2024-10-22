@@ -40,7 +40,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findAll_returnEmpty_ifDBIsEmpty() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest-group"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
     }
@@ -50,7 +50,7 @@ class GuestGroupControllerTest {
     void findAll_returnGuestGroup_ifDBHasGuestGroups() throws Exception {
         guestGroupRepository.save(new GuestGroup("1", List.of()));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest-group"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     [
@@ -67,7 +67,7 @@ class GuestGroupControllerTest {
     void findById_returnGuestGroup_ifIdExists() throws Exception {
         guestGroupRepository.save(new GuestGroup("1", List.of()));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest-group/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
@@ -80,7 +80,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findById_returnException_ifIdNotExists() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest-group/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -89,7 +89,7 @@ class GuestGroupControllerTest {
 void createGuestGroup_returnNewGuestGroup() throws Exception {
         when(idService.generateId()).thenReturn("1");
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/guest-group")
+            MockMvcRequestBuilders.post("/guestGroup")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                         [
