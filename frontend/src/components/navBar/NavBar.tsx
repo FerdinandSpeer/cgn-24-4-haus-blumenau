@@ -12,7 +12,8 @@ export default function NavBar() {
             <nav>
                 <ul id={"NavBarList"}>
                     <Link className={"NavBarElement"} to="/">Home</Link>
-                    <Link className={"NavBarElement"} to="/bookingPage">Booking</Link>
+                    <Link className={"NavBarElement"} to="/calendar">Kalender</Link>
+                    <Link className={"NavBarElement"} to="/bookingPage">Buchung</Link>
                     <Link className={"NavBarElement"} to="/adminDashboard">Admin Dashboard</Link>
 
                 </ul>

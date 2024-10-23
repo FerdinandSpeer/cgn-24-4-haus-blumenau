@@ -1,15 +1,54 @@
-import {DateCalendar, LocalizationProvider} from "@mui/x-date-pickers";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from '@fullcalendar/daygrid'
+import {useNavigate} from "react-router-dom";
 
-export default function CalendarComponent() {
-    return (
-        <div>
-            <h1>Calendar</h1>
-            <p>Calendar will be displayed here:</p>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateCalendar/>
-            </LocalizationProvider>
+type CalendarComponentProps = {
+    setArrivalDate: (arrivalDate: string) => void;
+    setDepartureDate: (departureDate: string) => void;
+}
 
-        </div>
+export default function CalendarComponent(props: CalendarComponentProps) {
+
+    const navigate = useNavigate();
+
+
+    function handleArrivalDateChange(event: React.FormEvent<HTMLInputElement>) {
+        props.setArrivalDate (event.currentTarget.value);
+    }
+
+    function handleDepartureDateChange(event: React.FormEvent<HTMLInputElement>) {
+        props.setDepartureDate (event.currentTarget.value);
+    }
+
+
+        return (
+        <>
+            <div>
+                <FullCalendar
+                    locales={"de"}
+                    firstDay={"1"}
+                    height={"auto"}
+                    plugins={[dayGridPlugin]}
+                    initialView="dayGridMonth"
+                    headerToolbar={{
+                        left: 'title',
+                        center: '',
+                        right: "today prev,next"
+                    }}
+                    selectable={true}
+                />
+            </div>
+            <form>
+                <div>
+                    <label htmlFor={"arrivalDate"}>Anreisedatum: </label>
+                    <input type={"date"} id="arrivalDate" name="arrivalDate" onChange={handleArrivalDateChange}/>
+                </div>
+                <div>
+                    <label htmlFor={"departureDate"}>Abreisedatum: </label>
+                    <input type={"date"} id="departureDate" name="departureDate" onChange={handleDepartureDateChange}/>
+                </div>
+                <button type="submit" onClick={() => navigate("/bookingPage")}>Bestätigen</button>
+            </form>
+        </>
     );
 }

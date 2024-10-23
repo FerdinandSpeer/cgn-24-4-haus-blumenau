@@ -1,26 +1,47 @@
 import "./GuestForm.css";
 import {Guest} from "../../type/Guest.ts";
 import axios from "axios";
-import {FormEvent, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import GuestList from "../guestList/GuestList.tsx";
 
-export default function GuestForm() {
+type guestFormProps = {
+    arrivalDate: string,
+    departureDate: string,
+}
 
-    const [newGuest, setNewGuest] = useState<Guest>();
+export default function GuestForm(props: guestFormProps) {
+
+    const [newGuest, setNewGuest] = useState({
+        groupName: "",
+        arrivalDate: props.arrivalDate,
+        departureDate: props.departureDate,
+        firstName: "",
+        lastName: "",
+        birthDate: "",
+        nationality: "",
+        street: "",
+        city: "",
+        zip: "",
+        email: "",
+        phoneNumber: "",
+        travelDocumentNumber: ""
+    });
+
     const [guestList, setGuestList] = useState<Guest[]>([]);
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-setGuestList(guestList => newGuest ? [...guestList, newGuest] : guestList);
-setNewGuest({
-            id: "",
+        setGuestList(guestList => newGuest ? [...guestList, newGuest] : guestList);
+        setNewGuest({
+            arrivalDate: props.arrivalDate,
+            departureDate: props.departureDate,
             groupName: "",
             firstName: "",
             lastName: "",
-            birthDate: "YYYY-MM-DD",
+            birthDate: "",
             city: "",
             email: "",
-            zip: 0,
+            zip: "",
             nationality: "",
             phoneNumber: "",
             street: "",
@@ -33,6 +54,8 @@ setNewGuest({
         axios.post("/guestGroup", guestList)
             .then(response => console.log(response))
             .then(() => setGuestList([]))
+            .then(() => alert("Anmeldung erfolgreich"))
+            .then(()=> props.arrivalDate)
             .catch(err => console.log(err))
     }
 
@@ -43,6 +66,10 @@ setNewGuest({
             [name]: value
         } as Guest));
     }
+
+    useEffect(() => {
+        console.log(props)
+    }, []);
 
 
     return (
@@ -55,6 +82,18 @@ setNewGuest({
                         <label>Gruppen-/
                             Familienname: </label>
                         <input value={newGuest?.groupName} type="text" id="groupName" name="groupName" required
+                               onChange={handleChange}/>
+                    </div>
+
+                    <div>
+                        <label>Anreise: </label>
+                        <input value={newGuest?.arrivalDate} type="date" id="arrivalDate" name="arrivalDate" required
+                               onChange={handleChange}/>
+                    </div>
+
+                    <div>
+                        <label>Abreise: </label>
+                        <input value={newGuest?.departureDate} type="date" id="departureDate" name="departureDate" required
                                onChange={handleChange}/>
                     </div>
 
