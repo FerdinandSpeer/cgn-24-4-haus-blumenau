@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -131,4 +132,13 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
     );
 }
 
+    @Test
+    void deleteGuestGroup_whenIdFound() throws Exception {
+        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/guestGroup/1"))
+                .andExpect(status().isOk());
+
+        assertTrue(guestGroupRepository.findAll().isEmpty());
+    }
 }

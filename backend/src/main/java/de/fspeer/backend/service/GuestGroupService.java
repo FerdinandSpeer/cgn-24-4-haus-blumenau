@@ -30,4 +30,8 @@ public class GuestGroupService {
     public List<GuestGroup> findAll() {
         return guestGroupRepository.findAll();
     }
+
+    public void deleteGuestGroupById(String id) {
+        guestGroupRepository.deleteById(id);
+    }
 }
