@@ -19,10 +19,7 @@ class GuestServiceTest {
 
     @Test
     void findAll() {
-        List<Guest> expectedGuestList = List.of(new Guest("1", "test",
-                "test", "test", "test", "test",
-                "test", "test", 1, "test",
-                "test", "test"));
+        List<Guest> expectedGuestList = List.of(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
         when(guestRepository.findAll()).thenReturn(expectedGuestList);
 
         GuestService guestService = new GuestService(guestRepository, idService);
@@ -34,10 +31,7 @@ class GuestServiceTest {
 
     @Test
     void findById() {
-        Guest expectedGuest = new Guest("1", "test",
-                "test", "test", "test", "test",
-                "test", "test", 1, "test",
-                "test", "test");
+        Guest expectedGuest = new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test");
         when(guestRepository.findById("1")).thenReturn(Optional.of(expectedGuest));
 
         GuestService guestService = new GuestService(guestRepository, idService);
@@ -49,12 +43,12 @@ class GuestServiceTest {
 
     @Test
     void saveGuest() {
-        Guest expectedGuest = new Guest("1", "test", "test", "test", "test", "test", "test", "test", 1, "test", "test","test");
+        Guest expectedGuest = new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test");
         when(guestRepository.save(any(Guest.class))).thenReturn(expectedGuest);
         when(idService.generateId()).thenReturn("1");
         GuestService guestService = new GuestService(guestRepository, idService);
 
-        Guest actualGuest = guestService.saveGuest(new GuestDTO("test", "test", "test", "test", "test", "test", "test", 1, "test", "test","test"));
+        Guest actualGuest = guestService.saveGuest(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
         verify(guestRepository).save(any(Guest.class));
         assertEquals(actualGuest, expectedGuest);
     }

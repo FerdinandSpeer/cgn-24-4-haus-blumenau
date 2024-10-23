@@ -35,10 +35,7 @@ class GuestControllerTest {
     @DirtiesContext
     @Test
     void findAll_getGuest_withGuestInDB() throws Exception {
-        guestRepository.save(new Guest("1", "test",
-                "test", "test", "test",
-                "test", "test","test",1,
-                "test", "test","test"));
+        guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
                 .andExpect(status().isOk())
@@ -47,6 +44,8 @@ class GuestControllerTest {
                         {
                             "id": "1",
                             "groupName": "test",
+                            "arrivalDate": "test",
+                            "departureDate": "test",
                             "firstName": "test"
                         }
                     ]
@@ -56,10 +55,7 @@ class GuestControllerTest {
     @DirtiesContext
     @Test
     void findById_getGuest_withGuestInDB() throws Exception {
-            guestRepository.save(new Guest("1", "test",
-                    "test", "test", "test",
-                    "test", "test","test",1,
-                    "test", "test","test"));
+            guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
             mockMvc.perform(MockMvcRequestBuilders.get("/guest/1"))
                     .andExpect(status().isOk())
