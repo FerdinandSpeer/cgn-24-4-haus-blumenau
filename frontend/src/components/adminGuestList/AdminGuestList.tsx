@@ -2,8 +2,12 @@ import {useEffect, useState} from "react";
 import {GuestGroup} from "../../type/GuestGroup.ts";
 import axios from "axios";
 
+type AdminGuestListProps = {
+    arrivalDate: string;
+    departureDate: string;
+}
 
-export default function AdminGuestList() {
+export default function AdminGuestList(props: AdminGuestListProps) {
 
     const [adminGuestList, setAdminGuestList] = useState<GuestGroup[]>([]);
 

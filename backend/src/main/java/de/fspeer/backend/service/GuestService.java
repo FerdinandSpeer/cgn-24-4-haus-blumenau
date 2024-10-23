@@ -31,4 +31,8 @@ public class GuestService {
     public Guest saveGuest(GuestDTO guestDTO) {
         return guestRepository.save(guestDTO.fromDTO(idService.generateId()));
     }
+
+    public void deleteById(String id) {
+        guestRepository.deleteById(id);
+    }
 }

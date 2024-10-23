@@ -1,12 +1,17 @@
 import AdminGuestList from "../../components/adminGuestList/AdminGuestList.tsx";
 import NavBar from "../../components/navBar/NavBar.tsx";
 
-export default function AdminDashboard() {
+type AdminDashboardProps = {
+    arrivalDate: string;
+    departureDate: string;
+}
+
+export default function AdminDashboard(props:AdminDashboardProps) {
     return (
         <div>
             <NavBar/>
         <h1>Admin Dashboard</h1>
-            <AdminGuestList />
+            <AdminGuestList arrivalDate={props.arrivalDate} departureDate={props.departureDate} />
         </div>
     );
 }
