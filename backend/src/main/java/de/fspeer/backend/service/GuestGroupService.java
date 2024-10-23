@@ -27,7 +27,6 @@ public class GuestGroupService {
         return guestGroupRepository.findById(Id).orElseThrow(()-> new NoSuchElementException("GuestGroup not found"));
     }
 
-
     public List<GuestGroup> findAll() {
         return guestGroupRepository.findAll();
     }

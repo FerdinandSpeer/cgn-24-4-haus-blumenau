@@ -20,7 +20,7 @@ class GuestGroupServiceTest {
 
     @Test
     void createGuestGroup() {
-        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", 1, "test", "test", "test"));
+        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
         GuestGroup guestGroup = new GuestGroup("1", "Group", guestsDTO);
         when(guestGroupRepository.save(guestGroup)).thenReturn(guestGroup);
         when(idService.generateId()).thenReturn("1");
@@ -34,7 +34,7 @@ class GuestGroupServiceTest {
 
     @Test
     void findByGroupId() {
-        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", 1, "test", "test","test"));
+        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
         GuestGroup guestGroup = new GuestGroup("2", "Group", guestsDTO);
         when(guestGroupRepository.findById("2")).thenReturn(Optional.of(guestGroup));
 

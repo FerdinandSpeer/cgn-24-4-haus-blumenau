@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public record Guest(
         String id,
         String groupName,
+        String arrivalDate,
+        String departureDate,
         String firstName,
         String lastName,
         String birthDate,
@@ -20,6 +22,8 @@ public record Guest(
     public GuestDTO toDTO() {
         return new GuestDTO(
                 this.groupName(),
+                this.arrivalDate(),
+                this.departureDate(),
                 this.firstName(),
                 this.lastName(),
                 this.birthDate(),

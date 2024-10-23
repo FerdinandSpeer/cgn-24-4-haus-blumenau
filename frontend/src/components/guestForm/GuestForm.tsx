@@ -1,7 +1,7 @@
 import "./GuestForm.css";
 import {Guest} from "../../type/Guest.ts";
 import axios from "axios";
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, useState} from "react";
 import GuestList from "../guestList/GuestList.tsx";
 
 type guestFormProps = {
@@ -50,26 +50,16 @@ export default function GuestForm(props: guestFormProps) {
     }
 
     function createNewGuestGroup() {
-
         axios.post("/guestGroup", guestList)
             .then(response => console.log(response))
             .then(() => setGuestList([]))
-            .then(() => alert("Anmeldung erfolgreich"))
-            .then(()=> props.arrivalDate)
+            .then(() => alert("Anmeldung erfolgreich!"))
             .catch(err => console.log(err))
     }
 
     function handleChange(e: FormEvent<HTMLInputElement>) {
         const {name, value} = e.currentTarget;
-        setNewGuest(prevState => ({
-            ...prevState,
-            [name]: value
-        } as Guest));
-    }
-
-    useEffect(() => {
-        console.log(props)
-    }, []);
+        setNewGuest(prevState => ({...prevState, [name]: value} as Guest));}
 
 
     return (
