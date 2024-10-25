@@ -37,4 +37,9 @@ public class GuestController {
     public void deleteGuestById(@PathVariable String id){
         guestService.deleteById(id);
     }
+
+    @PutMapping("/{id}")
+    public Guest updateGuest(@RequestBody GuestDTO guestDTO, @PathVariable String id) {
+        return guestService.updateGuest(guestDTO, id);
+    }
 }

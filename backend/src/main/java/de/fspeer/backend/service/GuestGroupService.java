@@ -19,12 +19,12 @@ public class GuestGroupService {
         this.idService = idService;
     }
 
-    public GuestGroup createGuestGroup(List<GuestDTO> guestsDTO, String groupName) {
-        return guestGroupRepository.save(new GuestGroup(idService.generateId(), groupName, guestsDTO));
+    public GuestGroup createGuestGroup(List<GuestDTO> guestsDTO) {
+        return guestGroupRepository.save(new GuestGroup(idService.generateId(), guestsDTO));
     }
 
     public GuestGroup findByGroupId(String Id) {
-        return guestGroupRepository.findById(Id).orElseThrow(()-> new NoSuchElementException("GuestGroup not found"));
+        return guestGroupRepository.findById(Id).orElseThrow(() -> new NoSuchElementException("GuestGroup not found"));
     }
 
     public List<GuestGroup> findAll() {
@@ -33,5 +33,10 @@ public class GuestGroupService {
 
     public void deleteGuestGroupById(String id) {
         guestGroupRepository.deleteById(id);
+    }
+
+    public GuestGroup update(String id, GuestGroup guestGroup) {
+        guestGroupRepository.findById(id);
+        return guestGroupRepository.save(guestGroup);
     }
 }

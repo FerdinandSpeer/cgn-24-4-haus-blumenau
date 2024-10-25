@@ -29,13 +29,18 @@ public class GuestGroupController {
     }
 
     @PostMapping
-    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO, String groupName) {
-        return guestGroupService.createGuestGroup(guestsDTO, groupName);
+    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO) {
+        return guestGroupService.createGuestGroup(guestsDTO);
     }
 
     @DeleteMapping("/{id}")
     public void deleteGuestGroupById(@PathVariable String id) {
         guestGroupService.deleteGuestGroupById(id);
+    }
+
+    @PutMapping("/{id}")
+    public GuestGroup update(@PathVariable String id, @RequestBody GuestGroup guestGroup) {
+        return guestGroupService.update(id, guestGroup);
     }
 
     @ExceptionHandler(NoSuchElementException.class)
