@@ -11,6 +11,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -104,5 +105,16 @@ class GuestControllerTest {
                                "phoneNumber": "017670126560",
                                "travelDocumentNumber": "GHJI987KL"
                              }"""));
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteGuestById() throws Exception {
+    guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
+
+    mockMvc.perform(MockMvcRequestBuilders.delete("/guest/1"))
+            .andExpect(status().isOk());
+
+    assertTrue(guestRepository.findAll().isEmpty());
     }
 }

@@ -32,4 +32,9 @@ public class GuestController {
     public Guest saveGuest(@RequestBody GuestDTO guestDTO) {
         return guestService.saveGuest(guestDTO);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteGuestById(@PathVariable String id){
+        guestService.deleteById(id);
+    }
 }
