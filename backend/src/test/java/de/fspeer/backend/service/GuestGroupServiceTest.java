@@ -21,13 +21,13 @@ class GuestGroupServiceTest {
     @Test
     void createGuestGroup() {
         List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
-        GuestGroup guestGroup = new GuestGroup("1", "Group", guestsDTO);
+        GuestGroup guestGroup = new GuestGroup("1", guestsDTO);
         when(guestGroupRepository.save(guestGroup)).thenReturn(guestGroup);
         when(idService.generateId()).thenReturn("1");
 
         GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
 
-        GuestGroup actualGuestGroup = guestGroupService.createGuestGroup(guestsDTO, "Group");
+        GuestGroup actualGuestGroup = guestGroupService.createGuestGroup(guestsDTO);
         verify(guestGroupRepository).save(guestGroup);
         assertEquals(actualGuestGroup, guestGroup);
     }
@@ -35,7 +35,7 @@ class GuestGroupServiceTest {
     @Test
     void findByGroupId() {
         List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
-        GuestGroup guestGroup = new GuestGroup("2", "Group", guestsDTO);
+        GuestGroup guestGroup = new GuestGroup("2", guestsDTO);
         when(guestGroupRepository.findById("2")).thenReturn(Optional.of(guestGroup));
 
         GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
@@ -56,7 +56,7 @@ void findByGroupId_groupNotFound() {
 @Test
     void updateById() {
         List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
-        GuestGroup guestGroup = new GuestGroup("2", "Group", guestsDTO);
+        GuestGroup guestGroup = new GuestGroup("2", guestsDTO);
         when(guestGroupRepository.findById("2")).thenReturn(Optional.of(guestGroup));
         when(guestGroupRepository.save(guestGroup)).thenReturn(guestGroup);
 

@@ -49,7 +49,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findAll_returnGuestGroup_ifDBHasGuestGroups() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
+        guestGroupRepository.save(new GuestGroup("1", List.of()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup"))
                 .andExpect(status().isOk())
@@ -57,7 +57,6 @@ class GuestGroupControllerTest {
                     [
                         {
                             "id": "1",
-                            "groupName": "test",
                             "guestsDTO": []
                         }
                     ]
@@ -67,7 +66,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findById_returnGuestGroup_ifIdExists() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
+        guestGroupRepository.save(new GuestGroup("1", List.of()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
                 .andExpect(status().isOk())
@@ -134,7 +133,7 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
 @DirtiesContext
     @Test
     void deleteGuestGroup_whenIdFound() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
+        guestGroupRepository.save(new GuestGroup("1", List.of()));
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/guestGroup/1"))
                 .andExpect(status().isOk());
@@ -145,7 +144,7 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
     @DirtiesContext
     @Test
     void updateGuestGroup_whenIdFoundInDB() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
+        guestGroupRepository.save(new GuestGroup("1", List.of()));
 
 
         mockMvc.perform(MockMvcRequestBuilders.put("/guestGroup/1")
@@ -153,7 +152,6 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
                 .content("""
                     {
                         "id": "1",
-                        "groupName": "Update",
                         "guestsDTO": []
                     }
                     """))
@@ -161,7 +159,6 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
                 .andExpect(content().json("""
                     {
                         "id": "1",
-                        "groupName": "Update",
                         "guestsDTO": []
                     }
                     """));
