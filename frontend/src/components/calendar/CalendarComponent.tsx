@@ -25,8 +25,8 @@ export default function CalendarComponent(props: CalendarComponentProps) {
         <>
             <div>
                 <FullCalendar
-                    locales={"de"}
-                    firstDay={"1"}
+                    locales={[{ code: 'de' }]}
+                    firstDay={1}
                     height={"auto"}
                     plugins={[dayGridPlugin]}
                     initialView="dayGridMonth"

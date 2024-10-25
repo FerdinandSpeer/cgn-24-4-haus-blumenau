@@ -1,13 +1,10 @@
 import {useEffect, useState} from "react";
+import "./AdminGuestList.css"
 import {GuestGroup} from "../../type/GuestGroup.ts";
 import axios from "axios";
 
-type AdminGuestListProps = {
-    arrivalDate: string;
-    departureDate: string;
-}
 
-export default function AdminGuestList(props: AdminGuestListProps) {
+export default function AdminGuestList() {
 
     const [adminGuestList, setAdminGuestList] = useState<GuestGroup[]>([]);
 
@@ -28,9 +25,17 @@ export default function AdminGuestList(props: AdminGuestListProps) {
                 <h1>Admin Guest List</h1>
                 <ul>
                     {adminGuestList.map((guest) => {
-                        if (guest.guestsDTO.length > 0){
-                            return <li key={guest.id}> {guest.guestsDTO[0].groupName}, Anzahl: {guest.guestsDTO.length}</li>
-                    }})}
+                        if (guest.guestsDTO.length > 0) {
+                            return <li key={guest.id}> {guest.guestsDTO[0].groupName},
+                                Anzahl: {guest.guestsDTO.length}
+                                <button className={"deleteButton styledButton"}>Löschen</button>
+                                <button className={"confirmButton styledButton"}>Bestätigen</button>
+                                <button className={"declineButton styledButton"}>Ablehnen</button>
+                            </li>
+                        }
+                    })}
+
+
                 </ul>
             </div>
 
