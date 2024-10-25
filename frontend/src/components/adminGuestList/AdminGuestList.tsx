@@ -26,22 +26,22 @@ export default function AdminGuestList() {
     }, []);
 
     return (
-
-            <div>
-                <h1>Admin Guest List</h1>
-                <ul>
-                    {adminGuestList.map((guest) => {
-                        if (guest.guestsDTO.length > 0) {
-                            return <li key={guest.id}> {guest.guestsDTO[0].groupName},
-                                Anzahl: {guest.guestsDTO.length}
-                                <button className={"deleteButton styledButton"} onClick={()=>deleteGuestGroup(guest.id ?? "")}>Löschen</button>
-                                <button className={"confirmButton styledButton"}>Bestätigen</button>
-                                <button className={"declineButton styledButton"}>Ablehnen</button>
-                            </li>
-                        }
-                    })}
-                </ul>
-            </div>
+        <div className={"AdminGuestList"}>
+    <h1>Gästegruppen:</h1>
+    <ul>
+        {adminGuestList.map((guest) => {
+            if (guest.guestsDTO.length > 0) {
+                return <li key={guest.id}> {guest.guestsDTO[0].groupName},
+                    Anzahl: {guest.guestsDTO.length}
+                    <br/>
+                    <button className={"deleteButton styledButton"} onClick={()=>deleteGuestGroup(guest.id ?? "")}>Löschen</button>
+                    <button className={"confirmButton styledButton"}>Bestätigen</button>
+                    <button className={"declineButton styledButton"}>Ablehnen</button>
+                </li>
+            }
+        })}
+    </ul>
+</div>
 
     )
 }

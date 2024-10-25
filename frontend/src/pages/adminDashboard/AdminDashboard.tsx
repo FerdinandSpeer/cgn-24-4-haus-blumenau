@@ -10,7 +10,7 @@ export default function AdminDashboard(props:AdminDashboardProps) {
     return (
         <div>
             <NavBar/>
-        <h1>Admin Dashboard</h1>
+        <h1>Hallo Thomas!</h1>
             <AdminGuestList arrivalDate={props.arrivalDate} departureDate={props.departureDate} />
         </div>
     );

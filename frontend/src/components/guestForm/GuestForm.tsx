@@ -65,7 +65,7 @@ export default function GuestForm(props: guestFormProps) {
     return (
         <div className={"BookingPage"}>
             <div className={"GuestForm"}>
-                <h1>Hier Anmelden</h1>
+                <h2>Daten eintragen:</h2>
                 <form className={"guestForm"} onSubmit={handleSubmit}>
 
                     <div>
