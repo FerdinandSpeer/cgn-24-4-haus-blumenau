@@ -131,7 +131,7 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
                 """)
     );
 }
-
+@DirtiesContext
     @Test
     void deleteGuestGroup_whenIdFound() throws Exception {
         guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
@@ -141,4 +141,31 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
 
         assertTrue(guestGroupRepository.findAll().isEmpty());
     }
+
+    @DirtiesContext
+    @Test
+    void updateGuestGroup_whenIdFoundInDB() throws Exception {
+        guestGroupRepository.save(new GuestGroup("1", "test", List.of()));
+
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/guestGroup/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                        "id": "1",
+                        "groupName": "Update",
+                        "guestsDTO": []
+                    }
+                    """))
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                    {
+                        "id": "1",
+                        "groupName": "Update",
+                        "guestsDTO": []
+                    }
+                    """));
+    }
+
+
 }

@@ -38,6 +38,11 @@ public class GuestGroupController {
         guestGroupService.deleteGuestGroupById(id);
     }
 
+    @PutMapping("/{id}")
+    public GuestGroup update(@PathVariable String id, @RequestBody GuestGroup guestGroup) {
+        return guestGroupService.update(id, guestGroup);
+    }
+
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNoSuchElementException(NoSuchElementException e) {

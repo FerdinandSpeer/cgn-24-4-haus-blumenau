@@ -24,7 +24,7 @@ public class GuestGroupService {
     }
 
     public GuestGroup findByGroupId(String Id) {
-        return guestGroupRepository.findById(Id).orElseThrow(()-> new NoSuchElementException("GuestGroup not found"));
+        return guestGroupRepository.findById(Id).orElseThrow(() -> new NoSuchElementException("GuestGroup not found"));
     }
 
     public List<GuestGroup> findAll() {
@@ -33,5 +33,10 @@ public class GuestGroupService {
 
     public void deleteGuestGroupById(String id) {
         guestGroupRepository.deleteById(id);
+    }
+
+    public GuestGroup update(String id, GuestGroup guestGroup) {
+        guestGroupRepository.findById(id);
+        return guestGroupRepository.save(guestGroup);
     }
 }
