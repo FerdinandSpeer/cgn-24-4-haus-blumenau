@@ -14,6 +14,12 @@ export default function AdminGuestList() {
             .catch(err => console.log(err));
     }
 
+    function deleteGuestGroup(id: string) {
+        axios.delete(`/guestGroup/${id}`)
+            .then(() => fetchGuestList())
+            .catch(err => console.log(err));
+    }
+
 
     useEffect(() => {
         fetchGuestList();
@@ -28,14 +34,12 @@ export default function AdminGuestList() {
                         if (guest.guestsDTO.length > 0) {
                             return <li key={guest.id}> {guest.guestsDTO[0].groupName},
                                 Anzahl: {guest.guestsDTO.length}
-                                <button className={"deleteButton styledButton"}>Löschen</button>
+                                <button className={"deleteButton styledButton"} onClick={()=>deleteGuestGroup(guest.id ?? "")}>Löschen</button>
                                 <button className={"confirmButton styledButton"}>Bestätigen</button>
                                 <button className={"declineButton styledButton"}>Ablehnen</button>
                             </li>
                         }
                     })}
-
-
                 </ul>
             </div>
 
