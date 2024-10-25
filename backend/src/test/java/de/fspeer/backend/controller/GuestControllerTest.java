@@ -117,4 +117,32 @@ class GuestControllerTest {
 
     assertTrue(guestRepository.findAll().isEmpty());
     }
+
+    @DirtiesContext
+    @Test
+    void updateGuest_whenGuestInDB() throws Exception {
+        guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/guest/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                        "id": "1",
+                        "firstName": "Ferdinand",
+                        "lastName": "Speer",
+                        "birthDate": "19-02-1990"
+                        }
+                """)
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                    {
+                        "id": "1",
+                        "firstName": "Ferdinand",
+                        "lastName": "Speer",
+                        "birthDate": "19-02-1990"
+                    }
+                """));
+
+    }
 }
