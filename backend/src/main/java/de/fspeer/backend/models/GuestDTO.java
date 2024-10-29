@@ -1,5 +1,6 @@
 package de.fspeer.backend.models;
 
+
 public record GuestDTO (
         String groupName,
         String arrivalDate,
@@ -16,8 +17,8 @@ public record GuestDTO (
         String travelDocumentNumber
 ) {
 
-    public Guest fromDTO(String id) {
-        return new Guest(id,
+    public Guest fromDTO(String guestId) {
+        return new Guest(guestId,
                 this.groupName(),
                 this.arrivalDate(),
                 this.departureDate(),

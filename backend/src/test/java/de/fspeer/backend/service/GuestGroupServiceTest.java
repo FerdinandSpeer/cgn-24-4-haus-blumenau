@@ -1,6 +1,6 @@
 package de.fspeer.backend.service;
 
-import de.fspeer.backend.models.GuestDTO;
+import de.fspeer.backend.models.Guest;
 import de.fspeer.backend.models.GuestGroup;
 import de.fspeer.backend.repository.GuestGroupRepository;
 import org.junit.jupiter.api.Test;
@@ -19,30 +19,30 @@ class GuestGroupServiceTest {
     private final IdService idService = mock(IdService.class);
 
     @Test
-    void createGuestGroup() {
-        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
-        GuestGroup guestGroup = new GuestGroup("1", guestsDTO);
-        when(guestGroupRepository.save(guestGroup)).thenReturn(guestGroup);
+    void createGuestGroup(){
+        List<Guest> expectedGuests = List.of(new Guest("test", "test", "test", "test", "test", "test", "test", "test", "test","test",1,"test","test","test"));
+        GuestGroup expectedGuestGroup = new GuestGroup("1", expectedGuests);
+        when(guestGroupRepository.save(new GuestGroup("1", expectedGuests)))
+                .thenReturn(expectedGuestGroup);
         when(idService.generateId()).thenReturn("1");
 
-        GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
+        GuestGroup actualGuestGroup = guestGroupRepository.save(new GuestGroup("1", expectedGuests));
+        verify(guestGroupRepository).save(new GuestGroup("1", expectedGuests));
+        assertEquals(actualGuestGroup, expectedGuestGroup);
 
-        GuestGroup actualGuestGroup = guestGroupService.createGuestGroup(guestsDTO);
-        verify(guestGroupRepository).save(guestGroup);
-        assertEquals(actualGuestGroup, guestGroup);
     }
 
     @Test
     void findByGroupId() {
-        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
-        GuestGroup guestGroup = new GuestGroup("2", guestsDTO);
+        List<Guest> guests = List.of(new Guest("test", "test", "test", "test", "test", "test", "test", "test", "test","test",1,"test","test","test"));
+        GuestGroup guestGroup = new GuestGroup("2", guests);
         when(guestGroupRepository.findById("2")).thenReturn(Optional.of(guestGroup));
 
         GuestGroupService guestGroupService = new GuestGroupService(guestGroupRepository, idService);
 
         GuestGroup actualGuestGroup = guestGroupService.findByGroupId("2");
         verify(guestGroupRepository).findById("2");
-        assertEquals(actualGuestGroup.guestsDTO(), guestGroup.guestsDTO());    }
+        assertEquals(actualGuestGroup.guests(), guestGroup.guests());    }
 
 @Test
 void findByGroupId_groupNotFound() {
@@ -55,8 +55,8 @@ void findByGroupId_groupNotFound() {
 
 @Test
     void updateById() {
-        List<GuestDTO> guestsDTO = List.of(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
-        GuestGroup guestGroup = new GuestGroup("2", guestsDTO);
+        List<Guest> guests = List.of(new Guest("test", "test", "test", "test", "test", "test", "test", "test", "test","test",1,"test","test","test"));
+        GuestGroup guestGroup = new GuestGroup("2", guests);
         when(guestGroupRepository.findById("2")).thenReturn(Optional.of(guestGroup));
         when(guestGroupRepository.save(guestGroup)).thenReturn(guestGroup);
 
@@ -67,5 +67,6 @@ void findByGroupId_groupNotFound() {
         verify(guestGroupRepository).save(guestGroup);
         assertEquals(actualGuestGroup, guestGroup);
     }
+
 
 }

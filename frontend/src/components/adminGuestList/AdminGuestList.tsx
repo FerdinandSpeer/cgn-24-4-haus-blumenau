@@ -2,15 +2,18 @@ import {useEffect, useState} from "react";
 import "./AdminGuestList.css"
 import {GuestGroup} from "../../type/GuestGroup.ts";
 import axios from "axios";
+import AdminGuestListForm from "../adminGuestListForm/AdminGuestListForm.tsx";
 
 
 export default function AdminGuestList() {
 
     const [adminGuestList, setAdminGuestList] = useState<GuestGroup[]>([]);
+    const [guestGroupToEdit, setGuestGroupToEdit] = useState<GuestGroup | null>(null);
 
     function fetchGuestList() {
         axios.get<GuestGroup[]>("/guestGroup")
-            .then(response => setAdminGuestList(response.data))
+            .then(response => {console.log(response.data);
+                setAdminGuestList(response.data)})
             .catch(err => console.log(err));
     }
 
@@ -34,14 +37,21 @@ export default function AdminGuestList() {
                 return <li key={guest.id}> {guest.guestsDTO[0].groupName},
                     Anzahl: {guest.guestsDTO.length}
                     <br/>
-                    <button className={"deleteButton styledButton"} onClick={()=>deleteGuestGroup(guest.id ?? "")}>Löschen</button>
+                    <button className={"deleteButton styledButton"}
+                            onClick={() => deleteGuestGroup(guest.id ?? "")}>Löschen
+                    </button>
                     <button className={"confirmButton styledButton"}>Bestätigen</button>
                     <button className={"declineButton styledButton"}>Ablehnen</button>
+                    <button className={"editButton styledButton"} onClick={()=> setGuestGroupToEdit(guest)}>Bearbeiten</button>
                 </li>
             }
         })}
     </ul>
-</div>
+            {guestGroupToEdit !== null ?
+                <div className={"adminGuestListForm"}>
+                    <AdminGuestListForm guestGroupToEdit={guestGroupToEdit} fetchGuestList={fetchGuestList}/>
+                </div> : null}
+        </div>
 
     )
 }

@@ -43,7 +43,7 @@ class GuestControllerTest {
                 .andExpect(content().json("""
                     [
                         {
-                            "id": "1",
+                            "guestId": "1",
                             "groupName": "test",
                             "arrivalDate": "test",
                             "departureDate": "test",
@@ -62,10 +62,9 @@ class GuestControllerTest {
                     .andExpect(status().isOk())
                     .andExpect(content().json("""
                     {
-                        "id": "1",
+                        "guestId": "1",
                         "groupName": "test",
-                        "firstName": "test",
-                        "lastName": "test"
+                        "arrivalDate": "test"
                     }
                     """));
         }
@@ -127,7 +126,7 @@ class GuestControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
-                        "id": "1",
+                        "guestId": "1",
                         "firstName": "Ferdinand",
                         "lastName": "Speer",
                         "birthDate": "19-02-1990"
@@ -137,7 +136,7 @@ class GuestControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
-                        "id": "1",
+                        "guestId": "1",
                         "firstName": "Ferdinand",
                         "lastName": "Speer",
                         "birthDate": "19-02-1990"

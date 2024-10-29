@@ -1,10 +1,12 @@
 package de.fspeer.backend.models;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public record Guest(
-        String id,
+        @Id
+        String guestId,
         String groupName,
         String arrivalDate,
         String departureDate,
