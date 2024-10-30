@@ -6,6 +6,7 @@ import de.fspeer.backend.repository.GuestRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -36,8 +37,11 @@ public class GuestService {
         guestRepository.deleteById(id);
     }
 
-    public Guest updateGuest(GuestDTO guestDTO, String id) {
-        findById(id);
-        return guestRepository.save(guestDTO.fromDTO(id));
+    public Guest updateGuest(Guest guest, String id) {
+        if (guestRepository.existsById(id)) {
+            return guestRepository.save(guest);
+        }
+
+        throw new NoSuchElementException("Guest not found");
     }
 }

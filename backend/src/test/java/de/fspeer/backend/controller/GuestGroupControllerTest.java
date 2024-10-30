@@ -56,8 +56,8 @@ class GuestGroupControllerTest {
                 .andExpect(content().json("""
                     [
                         {
-                            "id": "1",
-                            "guestsDTO": []
+                            "groupId": "1",
+                            "guests": []
                         }
                     ]
                     """));
@@ -66,14 +66,14 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findById_returnGuestGroup_ifIdExists() throws Exception {
-        guestGroupRepository.save(new GuestGroup("1", List.of()));
+        guestGroupRepository.save(new GuestGroup("1",List.of()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
-                        "id": "1",
-                        "guestsDTO": []
+                        "groupId": "1",
+                        "guests": []
                     }
                     """));
     }
@@ -112,8 +112,8 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
             .andExpect(status().isOk())
             .andExpect(content().json("""
                 {
-                    "id": "1",
-                    "guestsDTO": [
+                    "groupId": "1",
+                    "guests": [
                         {
                             "firstName": "test",
                             "lastName": "test",
@@ -151,15 +151,15 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
-                        "id": "1",
-                        "guestsDTO": []
+                        "groupId": "1",
+                        "guests": []
                     }
                     """))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
-                        "id": "1",
-                        "guestsDTO": []
+                        "groupId": "1",
+                        "guests": []
                     }
                     """));
     }

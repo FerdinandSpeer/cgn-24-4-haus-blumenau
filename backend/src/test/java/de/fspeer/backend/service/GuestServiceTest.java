@@ -6,9 +6,11 @@ import de.fspeer.backend.repository.GuestRepository;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 class GuestServiceTest {
@@ -45,7 +47,6 @@ class GuestServiceTest {
     void saveGuest() {
         Guest expectedGuest = new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test");
         when(guestRepository.save(any(Guest.class))).thenReturn(expectedGuest);
-        when(idService.generateId()).thenReturn("1");
         GuestService guestService = new GuestService(guestRepository, idService);
 
         Guest actualGuest = guestService.saveGuest(new GuestDTO("test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
@@ -53,16 +54,32 @@ class GuestServiceTest {
         assertEquals(actualGuest, expectedGuest);
     }
 
-   @Test
-void updateGuest(){
-    Guest existingGuest = new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test");
-    Guest updatedGuest = new Guest("1", "test", "test", "test", "Frank", "test", "test", "test", "test", "test", 1,"test","test","test");
-    when(guestRepository.findById("1")).thenReturn(Optional.of(existingGuest));
+@Test
+void updateGuest() {
+    Guest updatedGuest = new Guest("1", "test", "test", "test", "Frank", "test", "test", "test", "test", "test", 1, "test", "test", "test");
+    when(guestRepository.existsById("1")).thenReturn(true);
     when(guestRepository.save(any(Guest.class))).thenReturn(updatedGuest);
     GuestService guestService = new GuestService(guestRepository, idService);
 
-    Guest actualGuest = guestService.updateGuest(new GuestDTO("test", "test", "test", "Frank", "test", "test", "test", "test", "test", 1,"test","test","test"), "1");
+    Guest actualGuest = guestService.updateGuest(updatedGuest, "1");
+    verify(guestRepository).existsById("1");
     verify(guestRepository).save(any(Guest.class));
     assertEquals(actualGuest, updatedGuest);
 }
+
+    @Test
+    void updateGuestThrowsExceptionWhenGuestNotFound() {
+        Guest updatedGuest = new Guest("1", "test", "test", "test", "Frank", "test", "test", "test", "test", "test", 1, "test", "test", "test");
+        when(guestRepository.existsById("1")).thenReturn(false);
+        GuestService guestService = new GuestService(guestRepository, idService);
+
+        NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
+            guestService.updateGuest(updatedGuest, "1");
+        });
+
+        assertEquals("Guest not found", exception.getMessage());
+        verify(guestRepository).existsById("1");
+        verify(guestRepository, never()).save(any(Guest.class));
+    }
+
 }

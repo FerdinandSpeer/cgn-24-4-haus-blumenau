@@ -5,6 +5,19 @@
     border-radius: 5px;
     background-color: #f9f9f9;
 }
+.AdminGuestListContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.AdminGuestList {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.AdminGuestListForm {
+    flex: 1;
+}
 
 .AdminGuestList h1 {
     font-size: 24px;
@@ -70,4 +83,22 @@
 .declineButton {
     background-color: #f0ad4e;
     color: white;
+}
+
+.editButton {
+    background-color: #2196F3; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Add some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline-block */
+    font-size: 16px; /* Increase font size */
+    margin: 4px 2px; /* Add some margin */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 4px; /* Add rounded corners */
+}
+
+.editButton:hover {
+    background-color: #1976D2; /* Darker blue on hover */
 }

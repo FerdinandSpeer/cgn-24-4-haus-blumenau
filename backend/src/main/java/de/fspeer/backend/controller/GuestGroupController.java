@@ -1,6 +1,6 @@
 package de.fspeer.backend.controller;
 
-import de.fspeer.backend.models.GuestDTO;
+import de.fspeer.backend.models.Guest;
 import de.fspeer.backend.models.GuestGroup;
 import de.fspeer.backend.service.GuestGroupService;
 import org.springframework.http.HttpStatus;
@@ -29,8 +29,8 @@ public class GuestGroupController {
     }
 
     @PostMapping
-    public GuestGroup createGuestGroup(@RequestBody List<GuestDTO> guestsDTO) {
-        return guestGroupService.createGuestGroup(guestsDTO);
+    public GuestGroup createGuestGroup(@RequestBody List<Guest> guests) {
+        return guestGroupService.createGuestGroup(guests);
     }
 
     @DeleteMapping("/{id}")
