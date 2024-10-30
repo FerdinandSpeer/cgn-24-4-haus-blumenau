@@ -9,5 +9,6 @@ public record GuestGroup(
         @Id
         String groupId,
         List<Guest> guests
+
 ) {
 }
