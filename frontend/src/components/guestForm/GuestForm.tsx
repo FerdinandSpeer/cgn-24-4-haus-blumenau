@@ -61,12 +61,15 @@ export default function GuestForm(props: guestFormProps) {
 
     function handleChange(e: FormEvent<HTMLInputElement>) {
         const {name, value} = e.currentTarget;
-        setNewGuest(prevState => ({...prevState, [name]: value} as Guest));}
+        setNewGuest(prevState => ({...prevState, [name]: value} as Guest));
+    }
 
     function handleDeleteInGuestList(index: number) {
-    const updatedGuests = guestList.filter((_, i) => i !== index);
-    setGuestList(updatedGuests);
-}
+        const updatedGuests = guestList.filter((_, i) => i !== index);
+        setGuestList(updatedGuests);
+    }
+
+
 
     return (
         <div className={"BookingPage"}>
@@ -89,7 +92,8 @@ export default function GuestForm(props: guestFormProps) {
 
                     <div>
                         <label>Abreise: </label>
-                        <input value={newGuest?.departureDate} type="date" id="departureDate" name="departureDate" required
+                        <input value={newGuest?.departureDate} type="date" id="departureDate" name="departureDate"
+                               required
                                onChange={handleChange}/>
                     </div>
 
@@ -158,7 +162,7 @@ export default function GuestForm(props: guestFormProps) {
                 </form>
             </div>
             <div className={"GuestList"}>
-                <GuestList guests={guestList} handleDeleteInGuestList={handleDeleteInGuestList}/>
+                <GuestList guests={guestList} handleDeleteInGuestList={handleDeleteInGuestList} />
                 <button onClick={createNewGuestGroup} className="secondaryButton">Abschicken</button>
             </div>
         </div>
