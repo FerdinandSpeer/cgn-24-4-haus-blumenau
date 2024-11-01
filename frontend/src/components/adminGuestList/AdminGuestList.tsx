@@ -33,12 +33,12 @@ export default function AdminGuestList() {
     <h1>Gästegruppen:</h1>
     <ul>
         {adminGuestList.map((guest) => {
-            if (guest.guestsDTO.length > 0) {
-                return <li key={guest.id}> {guest.guestsDTO[0].groupName},
-                    Anzahl: {guest.guestsDTO.length}
+            if (guest.guests.length > 0) {
+                return <li key={guest.groupId}> {guest.guests[0].groupName},
+                    Anzahl: {guest.guests.length}
                     <br/>
                     <button className={"deleteButton styledButton"}
-                            onClick={() => deleteGuestGroup(guest.id ?? "")}>Löschen
+                            onClick={() => deleteGuestGroup(guest.groupId ?? "")}>Löschen
                     </button>
                     <button className={"confirmButton styledButton"}>Bestätigen</button>
                     <button className={"declineButton styledButton"}>Ablehnen</button>
@@ -49,7 +49,7 @@ export default function AdminGuestList() {
     </ul>
             {guestGroupToEdit !== null ?
                 <div className={"adminGuestListForm"}>
-                    <AdminGuestListForm guestGroupToEdit={guestGroupToEdit} fetchGuestList={fetchGuestList}/>
+                    <AdminGuestListForm guestGroupToEdit={guestGroupToEdit} fetchGuestList={fetchGuestList} setGuestGroupToEdit={setGuestGroupToEdit} setAdminGuestList={setAdminGuestList}/>
                 </div> : null}
         </div>
 

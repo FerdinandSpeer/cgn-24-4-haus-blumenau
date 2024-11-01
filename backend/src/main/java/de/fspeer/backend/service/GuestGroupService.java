@@ -20,7 +20,8 @@ public class GuestGroupService {
     }
 
     public GuestGroup createGuestGroup(List<Guest> guests) {
-        return guestGroupRepository.save(new GuestGroup(idService.generateId(), guests));
+        List<Guest> guestsWithId = guests.stream().map(guest -> guest.withGuestId(idService.generateId())).toList();
+        return guestGroupRepository.save(new GuestGroup(idService.generateId(), guestsWithId));
     }
 
     public GuestGroup findByGroupId(String Id) {
@@ -38,5 +39,12 @@ public class GuestGroupService {
     public GuestGroup update(String id, GuestGroup guestGroup) {
         guestGroupRepository.findById(id);
         return guestGroupRepository.save(guestGroup);
+    }
+
+    public GuestGroup deleteGuestFromGuestGroup(String id, String guestId) {
+    GuestGroup guestGroupToUpdate = guestGroupRepository.findById(id).orElseThrow();
+    List<Guest> tempList = guestGroupToUpdate.guests().stream().filter(guest -> !guest.guestId().equals(guestId)).toList();
+    guestGroupRepository.save(guestGroupToUpdate.withGuests(tempList));
+    return guestGroupRepository.findById(id).orElseThrow();
     }
 }

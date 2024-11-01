@@ -11,7 +11,8 @@ type guestFormProps = {
 
 export default function GuestForm(props: guestFormProps) {
 
-    const [newGuest, setNewGuest] = useState({
+    const [newGuest, setNewGuest] = useState<Guest>({
+        guestId: "",
         groupName: "",
         arrivalDate: props.arrivalDate,
         departureDate: props.departureDate,
@@ -21,7 +22,7 @@ export default function GuestForm(props: guestFormProps) {
         nationality: "",
         street: "",
         city: "",
-        zip: "",
+        zip: 0,
         email: "",
         phoneNumber: "",
         travelDocumentNumber: ""
@@ -33,6 +34,7 @@ export default function GuestForm(props: guestFormProps) {
         event.preventDefault();
         setGuestList(guestList => newGuest ? [...guestList, newGuest] : guestList);
         setNewGuest({
+            guestId: "",
             arrivalDate: props.arrivalDate,
             departureDate: props.departureDate,
             groupName: "",
@@ -41,7 +43,7 @@ export default function GuestForm(props: guestFormProps) {
             birthDate: "",
             city: "",
             email: "",
-            zip: "",
+            zip: 0,
             nationality: "",
             phoneNumber: "",
             street: "",
@@ -129,7 +131,7 @@ export default function GuestForm(props: guestFormProps) {
 
                     <div>
                         <label>PLZ: </label>
-                        <input value={newGuest?.zip} type="number" id="zip" name="zip" required
+                        <input placeholder={" "} type="number" id="zip" name="zip" required
                                onChange={handleChange}/>
                     </div>
 

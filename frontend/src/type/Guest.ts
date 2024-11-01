@@ -1,6 +1,6 @@
 
 export type Guest = {
-    id: string,
+    guestId: string,
     arrivalDate: string,
     departureDate: string,
     groupName: string,
