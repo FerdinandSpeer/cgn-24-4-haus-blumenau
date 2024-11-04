@@ -38,6 +38,11 @@ public class GuestGroupController {
         guestGroupService.deleteGuestGroupById(id);
     }
 
+    @PutMapping("/{id}/{guestId}")
+    public GuestGroup deleteGuestByGuestIdFromGuestGroup(@PathVariable String id, @PathVariable String guestId) {
+        return guestGroupService.deleteGuestFromGuestGroup(id, guestId);
+    }
+
     @PutMapping("/{id}")
     public GuestGroup update(@PathVariable String id, @RequestBody GuestGroup guestGroup) {
         return guestGroupService.update(id, guestGroup);

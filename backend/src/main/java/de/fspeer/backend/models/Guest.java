@@ -1,9 +1,11 @@
 package de.fspeer.backend.models;
 
+import lombok.With;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@With
 public record Guest(
         @Id
         String guestId,

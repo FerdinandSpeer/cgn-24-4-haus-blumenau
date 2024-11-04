@@ -18,6 +18,7 @@ class GuestGroupServiceTest {
     private final GuestGroupRepository guestGroupRepository = mock(GuestGroupRepository.class);
     private final IdService idService = mock(IdService.class);
 
+
     @Test
     void createGuestGroup(){
         List<Guest> expectedGuests = List.of(new Guest("test", "test", "test", "test", "test", "test", "test", "test", "test","test",1,"test","test","test"));
@@ -42,7 +43,8 @@ class GuestGroupServiceTest {
 
         GuestGroup actualGuestGroup = guestGroupService.findByGroupId("2");
         verify(guestGroupRepository).findById("2");
-        assertEquals(actualGuestGroup.guests(), guestGroup.guests());    }
+        assertEquals(actualGuestGroup.guests(), guestGroup.guests());
+    }
 
 @Test
 void findByGroupId_groupNotFound() {

@@ -11,7 +11,8 @@ type guestFormProps = {
 
 export default function GuestForm(props: guestFormProps) {
 
-    const [newGuest, setNewGuest] = useState({
+    const [newGuest, setNewGuest] = useState<Guest>({
+        guestId: "",
         groupName: "",
         arrivalDate: props.arrivalDate,
         departureDate: props.departureDate,
@@ -21,7 +22,7 @@ export default function GuestForm(props: guestFormProps) {
         nationality: "",
         street: "",
         city: "",
-        zip: "",
+        zip: 0,
         email: "",
         phoneNumber: "",
         travelDocumentNumber: ""
@@ -33,6 +34,7 @@ export default function GuestForm(props: guestFormProps) {
         event.preventDefault();
         setGuestList(guestList => newGuest ? [...guestList, newGuest] : guestList);
         setNewGuest({
+            guestId: "",
             arrivalDate: props.arrivalDate,
             departureDate: props.departureDate,
             groupName: "",
@@ -41,7 +43,7 @@ export default function GuestForm(props: guestFormProps) {
             birthDate: "",
             city: "",
             email: "",
-            zip: "",
+            zip: 0,
             nationality: "",
             phoneNumber: "",
             street: "",
@@ -59,12 +61,15 @@ export default function GuestForm(props: guestFormProps) {
 
     function handleChange(e: FormEvent<HTMLInputElement>) {
         const {name, value} = e.currentTarget;
-        setNewGuest(prevState => ({...prevState, [name]: value} as Guest));}
+        setNewGuest(prevState => ({...prevState, [name]: value} as Guest));
+    }
 
     function handleDeleteInGuestList(index: number) {
-    const updatedGuests = guestList.filter((_, i) => i !== index);
-    setGuestList(updatedGuests);
-}
+        const updatedGuests = guestList.filter((_, i) => i !== index);
+        setGuestList(updatedGuests);
+    }
+
+
 
     return (
         <div className={"BookingPage"}>
@@ -87,7 +92,8 @@ export default function GuestForm(props: guestFormProps) {
 
                     <div>
                         <label>Abreise: </label>
-                        <input value={newGuest?.departureDate} type="date" id="departureDate" name="departureDate" required
+                        <input value={newGuest?.departureDate} type="date" id="departureDate" name="departureDate"
+                               required
                                onChange={handleChange}/>
                     </div>
 
@@ -129,7 +135,7 @@ export default function GuestForm(props: guestFormProps) {
 
                     <div>
                         <label>PLZ: </label>
-                        <input value={newGuest?.zip} type="number" id="zip" name="zip" required
+                        <input placeholder={" "} type="number" id="zip" name="zip" required
                                onChange={handleChange}/>
                     </div>
 
@@ -156,7 +162,7 @@ export default function GuestForm(props: guestFormProps) {
                 </form>
             </div>
             <div className={"GuestList"}>
-                <GuestList guests={guestList} handleDeleteInGuestList={handleDeleteInGuestList}/>
+                <GuestList guests={guestList} handleDeleteInGuestList={handleDeleteInGuestList} />
                 <button onClick={createNewGuestGroup} className="secondaryButton">Abschicken</button>
             </div>
         </div>

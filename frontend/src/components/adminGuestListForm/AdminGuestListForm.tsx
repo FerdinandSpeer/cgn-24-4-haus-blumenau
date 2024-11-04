@@ -4,44 +4,45 @@ import {GuestGroup} from "../../type/GuestGroup.ts";
 
 
 type AdminGuestListFormProps = {
-    guestGroupToEdit: GuestGroup | null;
+    guestGroupToEdit: GuestGroup;
     fetchGuestList: () => void;
+    setGuestGroupToEdit: (guestGroup: GuestGroup | null) => void;
+    setAdminGuestList: (guestGroup: GuestGroup[]) => void;
 }
 
 function AdminGuestListForm(props: AdminGuestListFormProps) {
 
 
-    function handleDeleteGuest(id: string) {
-        console.log(id);
-        if (props.guestGroupToEdit !== null) {
-            axios.delete(`/guest/${id}`)
-                .then(() => props.fetchGuestList())
-                .catch(err => console.log(err));
-        }
+    function handleDeleteGuest (guestId: string) {
+        props.setGuestGroupToEdit({groupId: props.guestGroupToEdit.groupId,
+            guests: props.guestGroupToEdit.guests.filter(
+                (guest) => guest.guestId!==guestId
+            ) });
     }
 
     function handleEditGuestGroup() {
         if (props.guestGroupToEdit !== null) {
-            axios.put(`/guest/${props.guestGroupToEdit.id}`)
+            axios.put(`/guestGroup/${props.guestGroupToEdit.groupId}`, props.guestGroupToEdit)
                 .then(() => props.fetchGuestList())
                 .catch(err => console.log(err));
         }
     }
-
 
     return (
         <div className={"AdminGuestListForm"}>
             <h2>Gruppe: </h2>
             <div>
                 <ol>
-                    {props.guestGroupToEdit?.guestsDTO.map((guest) => {console.log(guest);
-                        return <li key={guest.id + '-' + guest.firstName}>{guest.firstName} {guest.lastName}
-                            <button type={"button"} onClick={()=>handleDeleteGuest(guest.id)}>Löschen</button>
+                    {props.guestGroupToEdit?.guests.map((guest) => {console.log(guest);
+                        return <li key={guest.guestId}>{guest.firstName} {guest.lastName}
+                            <button type={"button"} onClick={()=>handleDeleteGuest(guest.guestId)}>Löschen</button>
                         </li>
                     })}
                 </ol>
-                <button className={"styledButton"} onClick={handleEditGuestGroup}>Speichern</button>
-                <button className={"styledButton"} onClick={() => props.fetchGuestList}>Abbrechen</button>
+                <button className={"styledButton"} onClick={()=>handleEditGuestGroup()}>Speichern</button>
+                <button className={"styledButton"} onClick={() => {
+                    props.fetchGuestList();
+                    props.setGuestGroupToEdit(null)}}>Abbrechen</button>
             </div>
         </div>
     );
