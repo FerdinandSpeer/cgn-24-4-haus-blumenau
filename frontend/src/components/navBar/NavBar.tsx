@@ -14,6 +14,7 @@ export default function NavBar() {
                     <Link className={"NavBarElement"} to="/">Home</Link>
                     <Link className={"NavBarElement"} to="/calendar">Kalender</Link>
                     <Link className={"NavBarElement"} to="/bookingPage">Buchung</Link>
+                    <Link className={"NavBarElement"} to="/guestGroupDashboard">Guest-Group Dashboard</Link>
                     <Link className={"NavBarElement"} to="/adminDashboard">Admin Dashboard</Link>
 
                 </ul>
