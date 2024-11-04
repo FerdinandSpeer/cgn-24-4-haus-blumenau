@@ -52,7 +52,7 @@ export default function GuestForm(props: guestFormProps) {
     }
 
     function createNewGuestGroup() {
-        axios.post("/guestGroup", guestList)
+        axios.post("/api/guestGroup", guestList)
             .then(response => console.log(response))
             .then(() => setGuestList([]))
             .then(() => alert("Anmeldung erfolgreich!"))

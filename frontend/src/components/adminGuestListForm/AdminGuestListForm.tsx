@@ -22,7 +22,7 @@ function AdminGuestListForm(props: AdminGuestListFormProps) {
 
     function handleEditGuestGroup() {
         if (props.guestGroupToEdit !== null) {
-            axios.put(`/guestGroup/${props.guestGroupToEdit.groupId}`, props.guestGroupToEdit)
+            axios.put(`/api/guestGroup/${props.guestGroupToEdit.groupId}`, props.guestGroupToEdit)
                 .then(() => props.fetchGuestList())
                 .catch(err => console.log(err));
         }

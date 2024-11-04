@@ -28,7 +28,7 @@ class GuestControllerTest {
     @DirtiesContext
     @Test
     void findAll_returnEmpty_ifDBEmpty() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guest"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
     }
@@ -38,7 +38,7 @@ class GuestControllerTest {
     void findAll_getGuest_withGuestInDB() throws Exception {
         guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guest"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     [
@@ -73,7 +73,7 @@ class GuestControllerTest {
     @Test
     void saveGuest_shouldReturnNewGuest() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/guest")
+                MockMvcRequestBuilders.post("/api/guest")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                             {

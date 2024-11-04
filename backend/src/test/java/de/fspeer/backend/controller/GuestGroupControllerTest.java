@@ -41,7 +41,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findAll_returnEmpty_ifDBIsEmpty() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guestGroup"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
     }
@@ -51,7 +51,7 @@ class GuestGroupControllerTest {
     void findAll_returnGuestGroup_ifDBHasGuestGroups() throws Exception {
         guestGroupRepository.save(new GuestGroup("1", List.of()));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guestGroup"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     [
@@ -90,7 +90,7 @@ class GuestGroupControllerTest {
 void createGuestGroup_returnNewGuestGroup() throws Exception {
         when(idService.generateId()).thenReturn("1");
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/guestGroup")
+            MockMvcRequestBuilders.post("/api/guestGroup")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content("""
                         [

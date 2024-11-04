@@ -8,12 +8,11 @@ import {useParams} from "react-router-dom";
 
 export default function GuestGroupDashboard() {
 
-    const { groupId } = useParams<{ groupId: string }>();
+    const {groupId} = useParams<{ groupId: string }>();
     const [guestGroup, setGuestGroup] = useState<GuestGroup | null>(null);
-    console.log(groupId);
+
 
     function fetchGuestGroupById(groupId: string) {
-        console.log("Das ist ist die GroupId von useParams" + groupId);
         axios.get<GuestGroup>(`/api/guestGroup/${groupId}`)
             .then(response => {
                 setGuestGroup(response.data);
@@ -21,6 +20,7 @@ export default function GuestGroupDashboard() {
             .catch(err => console.log(err));
 
     }
+
     useEffect(() => {
         if (groupId) {
             fetchGuestGroupById(groupId);
@@ -30,7 +30,7 @@ export default function GuestGroupDashboard() {
     return (
         <>
             <NavBar/>
-            <h1>Hallo groupName Gruppe</h1>
+            <h1>Willkommen im Haus Blumen-Au</h1>
             <div className={"bodyGuestGroupDashboard"}>
                 <h2>Gästeliste</h2>
                 <div className={"list"}>
@@ -38,6 +38,7 @@ export default function GuestGroupDashboard() {
                         {guestGroup?.guests.map((guest, index) => (
                             <li key={index}>
                                 {guest.firstName} {guest.lastName}
+                                <button>Bearbeiten</button>
                             </li>
                         ))}
                     </ol>

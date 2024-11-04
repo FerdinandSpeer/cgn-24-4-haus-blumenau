@@ -22,6 +22,7 @@ function App() {
             <Route path={"/bookingPage"} element={<BookingPage arrivalDate={arrivalDate} departureDate={departureDate}/>}/>
             <Route path={"/adminDashboard"} element={<AdminDashboard/>}/>
             <Route path={"/guestGroupDashboard"} element={<GuestGroupDashboard/>}/>
+            <Route path={"/guestGroupDashboard/:groupId"} element={<GuestGroupDashboard/>}/>
         </Routes>
         </>
     )
