@@ -11,7 +11,18 @@ export default function GuestGroupDashboard() {
     const {groupId} = useParams<{ groupId: string }>();
     const [guestGroup, setGuestGroup] = useState<GuestGroup | null>(null);
 
-
+    /**
+     * Ruft eine Gästegruppe anhand der Gruppen-ID vom Server ab und speichert sie im State.
+     *
+     * Diese Funktion sendet eine GET-Anfrage an den API-Endpunkt `/api/guestGroup/{groupId}`
+     * und aktualisiert den State mit den empfangenen Daten. Bei einem Fehler wird dieser im
+     * Konsolenprotokoll angezeigt.
+     *
+     * @param {string} groupId - Die eindeutige ID der Gästegruppe, die abgerufen werden soll.
+     * @returns {void} Diese Funktion gibt keinen Wert zurück.
+     *
+     * @throws {Error} Wenn die Anfrage fehlschlägt, wird der Fehler in der Konsole protokolliert.
+     */
     function fetchGuestGroupById(groupId: string) {
         axios.get<GuestGroup>(`/api/guestGroup/${groupId}`)
             .then(response => {
