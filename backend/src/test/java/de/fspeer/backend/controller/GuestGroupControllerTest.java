@@ -68,7 +68,7 @@ class GuestGroupControllerTest {
     void findById_returnGuestGroup_ifIdExists() throws Exception {
         guestGroupRepository.save(new GuestGroup("1",List.of()));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guestGroup/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     {
@@ -81,7 +81,7 @@ class GuestGroupControllerTest {
     @DirtiesContext
     @Test
     void findById_returnException_ifIdNotExists() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/guestGroup/1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guestGroup/1"))
                 .andExpect(status().isNotFound());
     }
 
@@ -135,7 +135,7 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
     void deleteGuestGroup_whenIdFound() throws Exception {
         guestGroupRepository.save(new GuestGroup("1", List.of()));
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/guestGroup/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/guestGroup/1"))
                 .andExpect(status().isOk());
 
         assertTrue(guestGroupRepository.findAll().isEmpty());
@@ -147,7 +147,7 @@ void createGuestGroup_returnNewGuestGroup() throws Exception {
         guestGroupRepository.save(new GuestGroup("1", List.of()));
 
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/guestGroup/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/guestGroup/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
