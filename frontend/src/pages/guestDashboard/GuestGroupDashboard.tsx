@@ -4,6 +4,7 @@ import axios from "axios";
 import {GuestGroup} from "../../type/GuestGroup.ts";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import GuestGroupListById from "../../components/guestGroupListById/GuestGroupListById.tsx";
 
 
 export default function GuestGroupDashboard() {
@@ -23,7 +24,7 @@ export default function GuestGroupDashboard() {
      *
      * @throws {Error} Wenn die Anfrage fehlschlägt, wird der Fehler in der Konsole protokolliert.
      */
-    function fetchGuestGroupById(groupId: string) {
+    function fetchGuestGroupById(groupId: string): void {
         axios.get<GuestGroup>(`/api/guestGroup/${groupId}`)
             .then(response => {
                 setGuestGroup(response.data);
@@ -43,23 +44,13 @@ export default function GuestGroupDashboard() {
             <NavBar/>
             <h1>Willkommen im Haus Blumen-Au</h1>
             <div className={"bodyGuestGroupDashboard"}>
-                <h2>Gästeliste</h2>
-                <div className={"list"}>
-                    <ol className={"guestGroupList"}>
-                        {guestGroup?.guests.map((guest, index) => (
-                            <li key={index}>
-                                {guest.firstName} {guest.lastName}
-                                <button>Bearbeiten</button>
-                            </li>
-                        ))}
-                    </ol>
-                </div>
+                <GuestGroupListById guestGroup={guestGroup} />
             </div>
 
             <div className={"bodyWeatherBookingTime"}>
                 <div className={"weatherApi"}>
                     <h2>Wetter Schönau am Königssee</h2>
-                    <p>Hier zeigt die api die Daten vom Wetter an.</p>
+                    <p> ...Hier soll das Wetter für 7-Tage stehen...</p>
                 </div>
 
                 <div className={"bookingTime"}>
