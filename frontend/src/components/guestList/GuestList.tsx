@@ -1,4 +1,3 @@
-// GuestList.tsx
 import {useEffect, useState} from "react";
 import {Guest} from "../../type/Guest";
 import GuestEditForm from "../guestEditForm/GuestEditForm.tsx";

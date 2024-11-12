@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/guestGroup")
+@RequestMapping("/api/guestGroup")
 public class GuestGroupController {
 
     private final GuestGroupService guestGroupService;
@@ -23,6 +23,7 @@ public class GuestGroupController {
     public List<GuestGroup> findAll() {
         return guestGroupService.findAll();
     }
+
     @GetMapping("/{Id}")
     public GuestGroup findByGroupId(@PathVariable String Id) {
         return guestGroupService.findByGroupId(Id);

@@ -41,7 +41,6 @@ public class GuestService {
         if (guestRepository.existsById(id)) {
             return guestRepository.save(guest);
         }
-
         throw new NoSuchElementException("Guest not found");
     }
 }

@@ -1,0 +1,42 @@
+.bodyGuestGroupDashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4vw;
+}
+.bodyWeatherBookingTime{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.guestGroupList{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+.weatherApi{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.bookingTime{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}

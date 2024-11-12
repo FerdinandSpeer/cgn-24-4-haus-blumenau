@@ -28,7 +28,7 @@ class GuestControllerTest {
     @DirtiesContext
     @Test
     void findAll_returnEmpty_ifDBEmpty() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guest"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("[]"));
     }
@@ -38,7 +38,7 @@ class GuestControllerTest {
     void findAll_getGuest_withGuestInDB() throws Exception {
         guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/guest"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/guest"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
                     [
@@ -58,7 +58,7 @@ class GuestControllerTest {
     void findById_getGuest_withGuestInDB() throws Exception {
             guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
-            mockMvc.perform(MockMvcRequestBuilders.get("/guest/1"))
+            mockMvc.perform(MockMvcRequestBuilders.get("/api/guest/1"))
                     .andExpect(status().isOk())
                     .andExpect(content().json("""
                     {
@@ -73,7 +73,7 @@ class GuestControllerTest {
     @Test
     void saveGuest_shouldReturnNewGuest() throws Exception {
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/guest")
+                MockMvcRequestBuilders.post("/api/guest")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                             {
@@ -111,7 +111,7 @@ class GuestControllerTest {
     void deleteGuestById() throws Exception {
     guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
-    mockMvc.perform(MockMvcRequestBuilders.delete("/guest/1"))
+    mockMvc.perform(MockMvcRequestBuilders.delete("/api/guest/1"))
             .andExpect(status().isOk());
 
     assertTrue(guestRepository.findAll().isEmpty());
@@ -122,14 +122,13 @@ class GuestControllerTest {
     void updateGuest_whenGuestInDB() throws Exception {
         guestRepository.save(new Guest("1", "test", "test", "test", "test", "test", "test", "test", "test", "test", 1,"test","test","test"));
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/guest/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/guest/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("""
                     {
                         "guestId": "1",
                         "firstName": "Ferdinand",
-                        "lastName": "Speer",
-                        "birthDate": "19-02-1990"
+                        "lastName": "Speer"
                         }
                 """)
                 )
@@ -138,8 +137,7 @@ class GuestControllerTest {
                     {
                         "guestId": "1",
                         "firstName": "Ferdinand",
-                        "lastName": "Speer",
-                        "birthDate": "19-02-1990"
+                        "lastName": "Speer"
                     }
                 """));
 

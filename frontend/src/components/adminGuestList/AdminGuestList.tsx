@@ -10,22 +10,22 @@ export default function AdminGuestList() {
     const [adminGuestList, setAdminGuestList] = useState<GuestGroup[]>([]);
     const [guestGroupToEdit, setGuestGroupToEdit] = useState<GuestGroup | null>(null);
 
-    function fetchGuestList() {
-        axios.get<GuestGroup[]>("/guestGroup")
+    function fetchGuestGroupList() {
+        axios.get<GuestGroup[]>("/api/guestGroup")
             .then(response => {console.log(response.data);
                 setAdminGuestList(response.data)})
             .catch(err => console.log(err));
     }
 
     function deleteGuestGroup(id: string) {
-        axios.delete(`/guestGroup/${id}`)
-            .then(() => fetchGuestList())
+        axios.delete(`/api/guestGroup/${id}`)
+            .then(() => fetchGuestGroupList())
             .catch(err => console.log(err));
     }
 
 
     useEffect(() => {
-        fetchGuestList();
+        fetchGuestGroupList();
     }, []);
 
     return (
@@ -49,7 +49,7 @@ export default function AdminGuestList() {
     </ul>
             {guestGroupToEdit !== null ?
                 <div className={"adminGuestListForm"}>
-                    <AdminGuestListForm guestGroupToEdit={guestGroupToEdit} fetchGuestList={fetchGuestList} setGuestGroupToEdit={setGuestGroupToEdit} setAdminGuestList={setAdminGuestList}/>
+                    <AdminGuestListForm guestGroupToEdit={guestGroupToEdit} fetchGuestList={fetchGuestGroupList} setGuestGroupToEdit={setGuestGroupToEdit} setAdminGuestList={setAdminGuestList}/>
                 </div> : null}
         </div>
 
